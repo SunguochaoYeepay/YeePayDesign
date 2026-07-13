@@ -22,6 +22,7 @@ description: 基于老板管账后台视觉规范，生成列表查询页 + 新�
 - `shell/menu.config.yaml`
 - `templates/page-content.template.html`
 - `templates/list.template.html`
+- `templates/detail.template.html`
 - `templates/modal-form.template.html`
 - `templates/result.template.html`
 - `specs/page-spec-rules.md`
@@ -34,10 +35,11 @@ description: 基于老板管账后台视觉规范，生成列表查询页 + 新�
 4. 根据 `shell/menu.config.yaml` 确认当前菜单、Tabs、用户区，但不要重新生成 Shell。
 5. 使用列表模板生成主页面内容。
 6. 如果有新增/编辑，使用弹窗表单模板生成内容区相关弹窗。
-7. 如果有提交成功，使用结果页模板生成结果状态。
-8. 默认输出 `page-content.html` 片段。
-9. 同时输出 `preview.html`，但 `preview.html` 只能通过固定 Shell 注入生成，不能手工重画 Shell。
-10. 最后给出简短自检结果。
+7. 如果有详情，使用详情模板生成分组信息和内嵌表格。
+8. 如果有提交成功，使用结果页模板生成结果状态。
+9. 默认输出 `page-content.html` 片段。
+10. 同时输出 `preview.html`，但 `preview.html` 只能通过固定 Shell 注入生成，不能手工重画 Shell。
+11. 最后给出简短自检结果。
 
 ## 生成边界
 
@@ -132,6 +134,19 @@ Shell 可调整项只来自 `shell/menu.config.yaml`：
 - 提交按钮。
 
 表单字段使用统一 `.field` 结构。
+
+## 详情页规则
+
+详情页必须包含：
+
+- 一个或多个白色详情卡片。
+- 每个详情卡片有标题。
+- 卡片内可以有多个信息分组。
+- 信息字段使用三列栅格，字段较长时允许跨列或自动换行。
+- 字段 label 和 value 必须左对齐，不能做成独立小卡片。
+- 详情中如有明细数据，使用内嵌表格。
+- 内嵌表格必须有表头、行数据和状态表达。
+- 不允许重新生成左侧菜单、顶部栏、页脚。
 
 ## 结果页规则
 
