@@ -1,0 +1,71 @@
+<!--
+  固定后台 Shell。生成页面时复用此结构，只替换 #page-content。
+  页面主内容由 templates/*.template.html 生成。
+-->
+<div class="admin-shell">
+  <aside class="global-sidebar">
+    <div class="brand-mark">老板<br>管账</div>
+    <nav class="global-nav">
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▦</span><span>首页</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">◼</span><span>账户</span></a>
+      <a class="global-nav-item active" href="#"><span class="global-nav-icon">▰</span><span>交易</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">♥</span><span>服务</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▣</span><span>产品</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▤</span><span>资金</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▥</span><span>开发</span></a>
+    </nav>
+  </aside>
+
+  <aside class="module-sidebar">
+    <div class="module-title">
+      <span>交易中心</span>
+      <span>⚙</span>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title">￥ 入账方管理</div>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title" style="color: var(--color-primary);">￥ 余额分账</div>
+      <nav class="sub-menu">
+        <a class="sub-menu-item" href="#">发起余额分账</a>
+        <a class="sub-menu-item active" href="#">余额分账规则设置</a>
+        <a class="sub-menu-item" href="#">余额分账查询</a>
+        <a class="sub-menu-item" href="#">到账信息查询</a>
+      </nav>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title">☷ 余额分账-订单</div>
+      <div class="menu-group-title">▣ 订单分账</div>
+      <div class="menu-group-title">▤ 分账复核</div>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="topbar">
+      <div class="tabs">
+        <span>☰</span>
+        <span class="tab">首页 ×</span>
+        <span class="tab">我的账号 ×</span>
+        <span class="tab">我的账号 ×</span>
+        <span class="tab active">余额分账规则设置 ×</span>
+      </div>
+      <div class="top-actions">
+        <span>?</span>
+        <span>◐</span>
+        <span>⇩</span>
+        <span>♧</span>
+        <span class="avatar">航</span>
+        <div>
+          <div style="color: var(--text-title); font-weight: 600;">航旅无卡测试 ▾</div>
+          <div style="font-size: 12px; color: var(--text-muted);">10044439448</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="page-content" class="page">
+      <!-- AI 只生成并替换这里 -->
+    </section>
+
+    <footer class="copyright">© 京ICP备08100193号　易宝支付有限公司版权所有</footer>
+  </main>
+</div>

@@ -1,0 +1,162 @@
+{
+  "name": "Merchant Admin",
+  "tagline": "老板管账后台管理系统视觉规范",
+  "description": "易宝支付老板管账后台管理系统，面向企业级Web应用，强调红色主色调、清晰的信息层级和高效的后台操作模式。",
+  "sourceUrl": "designmd://merchant-admin",
+  "logo": {
+    "primary": "logos/_png",
+    "alternates": [],
+    "notes": "No logo supplied. Component/UI-focused rather than brand-mark-driven."
+  },
+  "colors": [
+    {
+      "role": "background",
+      "hex": "#ffffff",
+      "name": "Surface",
+      "usage": "page canvas, primary background"
+    },
+    {
+      "role": "foreground",
+      "hex": "#1d2129",
+      "name": "Text Base",
+      "usage": "primary body text and headings"
+    },
+    {
+      "role": "accent",
+      "hex": "#f53f3f",
+      "name": "Primary Red",
+      "usage": "primary buttons, active states, links, badges, status indicators"
+    },
+    {
+      "role": "accent-secondary",
+      "hex": "#1677ff",
+      "name": "Info Blue",
+      "usage": "secondary buttons, links, modify action, info states"
+    },
+    {
+      "role": "surface",
+      "hex": "#f7f8fa",
+      "name": "Surface 2",
+      "usage": "page background, table headers, card backgrounds, alternating rows"
+    },
+    {
+      "role": "muted",
+      "hex": "#86909c",
+      "name": "Muted Gray",
+      "usage": "secondary text, metadata labels, helper text, placeholders"
+    },
+    {
+      "role": "border",
+      "hex": "#e5e6eb",
+      "name": "Border Gray",
+      "usage": "input borders, table borders, card dividers, section rules"
+    }
+  ],
+  "typography": {
+    "display": {
+      "family": "PingFang SC",
+      "fallbacks": [
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "weights": [
+        400,
+        600
+      ]
+    },
+    "body": {
+      "family": "PingFang SC",
+      "fallbacks": [
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "weights": [
+        400,
+        600
+      ]
+    }
+  },
+  "voice": {
+    "adjectives": [
+      "专业的",
+      "清晰的",
+      "高效的",
+      "简洁的"
+    ],
+    "tone": "专业、简洁的后台管理系统UI语言。面向商户管理和资金操作场景，文案直接明确，避免装饰性表达。",
+    "messagingPillars": [
+      "基于红色主色调的企业级后台管理视觉规范",
+      "面向商户管理、资金分账、交易查询等核心业务场景",
+      "清晰的表格、筛选、分页和批量操作模式"
+    ],
+    "vocabulary": {
+      "use": [
+        "查询",
+        "筛选",
+        "新增",
+        "修改",
+        "失效",
+        "详情",
+        "导出",
+        "分账",
+        "规则",
+        "余额"
+      ],
+      "avoid": [
+        "营销用语",
+        "情感化表达",
+        "模糊不清的指示词"
+      ]
+    }
+  },
+  "imagery": {
+    "style": "以UI界面截图为主，展示真实的后台管理、表格列表、数据筛选等企业级操作场景。",
+    "subjects": [
+      "数据表格列表",
+      "筛选查询面板",
+      "分页控件",
+      "侧边导航栏",
+      "操作按钮组"
+    ],
+    "treatment": "使用真实产品界面截图作为视觉参考，保持清晰度和信息密度。",
+    "avoid": [
+      "插画风格图形",
+      "人物照片",
+      "场景照片"
+    ],
+    "samples": [
+      {
+        "file": "imagery/_png",
+        "kind": "upload"
+      },
+      {
+        "file": "imagery/screenshot-20260713-112648.png",
+        "kind": "upload"
+      },
+      {
+        "file": "imagery/screenshot-20260713-112727.png",
+        "kind": "upload"
+      },
+      {
+        "file": "imagery/screenshot-20260713-112803.png",
+        "kind": "upload"
+      },
+      {
+        "file": "imagery/screenshot-20260713-112827.png",
+        "kind": "upload"
+      }
+    ]
+  },
+  "layout": {
+    "radius": "4px",
+    "borderWeight": "1px",
+    "spacing": "4px baseline grid",
+    "postureRules": [
+      "4px圆角体系：SM=2px, MD=4px（默认）, LG=6px",
+      "1px细边框，使用--border色作为默认分割",
+      "信息密度优先：表头紧凑，行高适中，保证数据可视性",
+      "左对齐为主的内容对齐策略",
+      "固定侧边栏 + 可滚动主内容区域的标准后台布局"
+    ]
+  }
+}

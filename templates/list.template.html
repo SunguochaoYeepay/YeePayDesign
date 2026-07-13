@@ -1,0 +1,52 @@
+<!-- 列表查询页模板：替换 {{...}} 占位符或按 Page Spec 扩展字段/列 -->
+<section class="search-card card">
+  <div class="search-grid">
+    {{SEARCH_FIELDS}}
+  </div>
+  <div class="search-actions">
+    <button class="btn btn-text">收起 ⌃</button>
+    <button class="btn">重置</button>
+    <button class="btn btn-primary">查询</button>
+  </div>
+</section>
+
+<section class="table-card card">
+  <div class="table-toolbar">
+    <div class="summary">
+      查询统计： 共 <strong>{{TOTAL_COUNT}}</strong> 条规则 ｜ 生效中 <strong>{{ACTIVE_COUNT}}</strong> 条
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn btn-primary">{{PRIMARY_ACTION}}</button>
+      <button class="btn">⇩</button>
+      <button class="btn">⚙</button>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          {{TABLE_HEADERS}}
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{TABLE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    <div>共 {{ROW_COUNT}} 条记录 第 1 / 1 页</div>
+    <div class="pages">
+      <span>‹</span>
+      <span class="page-no">1</span>
+      <span class="page-no active">2</span>
+      <span class="page-no">3</span>
+      <span class="page-no">4</span>
+      <span class="page-no">5</span>
+      <span>›</span>
+      <button class="btn">20条/页⌄</button>
+    </div>
+  </div>
+</section>

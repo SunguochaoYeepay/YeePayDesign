@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老板管账后台原型预览</title>
+  <style>
+:root {
+  --color-primary: #f53f3f;
+  --color-primary-hover: #ff5a4f;
+  --color-primary-light: #fff2f2;
+  --color-info: #1677ff;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #f53f3f;
+
+  --bg-page: #f7f8fa;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f7f8fa;
+  --text-title: #1d2129;
+  --text-regular: #4e5969;
+  --text-muted: #86909c;
+  --border: #e5e6eb;
+  --border-strong: #c9cdd4;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  --font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+
+  --shell-icon-width: 78px;
+  --shell-menu-width: 246px;
+  --topbar-height: 56px;
+  --footer-height: 34px;
+  --control-height: 40px;
+  --table-row-height: 58px;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --motion-fast: 120ms ease;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  color: var(--text-regular);
+  background: var(--bg-page);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.admin-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--shell-icon-width) var(--shell-menu-width) 1fr;
+  background: var(--bg-page);
+}
+
+.global-sidebar,
+.module-sidebar {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+}
+
+.global-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 100%;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+  font-size: 18px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.global-nav {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+}
+
+.global-nav-item {
+  position: relative;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  color: #606266;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.global-nav-item.active {
+  color: var(--color-primary);
+}
+
+.global-nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 3px;
+  height: 40px;
+  background: var(--color-primary);
+}
+
+.global-nav-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.module-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.module-title {
+  height: 56px;
+  padding: 0 var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-title);
+  font-size: var(--font-size-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-group {
+  padding: var(--space-4) var(--space-3) 0;
+}
+
+.menu-group-title {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-title);
+  font-size: 15px;
+}
+
+.sub-menu {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-1) 0 var(--space-2) 22px;
+}
+
+.sub-menu-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--text-regular);
+  text-decoration: none;
+}
+
+.sub-menu-item.active {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.app-main {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr var(--footer-height);
+}
+
+.topbar {
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-5);
+  background: #f3f4f6;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.tab {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.tab.active {
+  color: var(--color-primary);
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--text-title);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.page {
+  min-width: 0;
+  padding: var(--space-5);
+  overflow: auto;
+}
+
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.search-card {
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: var(--space-4) var(--space-5);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.field label {
+  color: var(--text-title);
+  text-align: right;
+}
+
+.required {
+  color: var(--color-primary);
+}
+
+.control {
+  height: var(--control-height);
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-3);
+  color: var(--text-title);
+  background: #fff;
+}
+
+.search-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.btn {
+  height: var(--control-height);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  padding: 0 var(--space-5);
+  color: var(--text-regular);
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn-primary {
+  border-color: var(--color-primary);
+  color: #fff;
+  background: var(--color-primary);
+}
+
+.btn-text {
+  height: auto;
+  border: 0;
+  padding: 0;
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.table-card {
+  padding: var(--space-5);
+}
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.summary strong {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1180px;
+}
+
+th {
+  height: 48px;
+  padding: 0 var(--space-4);
+  color: var(--text-title);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  height: var(--table-row-height);
+  padding: 0 var(--space-4);
+  color: var(--text-title);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tr:hover td {
+  background: #fafafa;
+}
+
+.link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.row-actions {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.pagination {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-title);
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.page-no {
+  min-width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+}
+
+.page-no.active {
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.result-card {
+  min-height: calc(100vh - 150px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.result-icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto var(--space-6);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 46px;
+  background: #45c414;
+}
+
+.result-title {
+  margin: 0 0 var(--space-3);
+  color: var(--text-title);
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.result-desc {
+  margin: 0 0 32px;
+  color: var(--text-muted);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.modal {
+  width: 720px;
+  max-width: calc(100vw - 48px);
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.modal-header,
+.modal-footer {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header {
+  justify-content: space-between;
+}
+
+.modal-title {
+  color: var(--text-title);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-body {
+  padding: var(--space-6);
+}
+
+.modal-footer {
+  justify-content: flex-end;
+  gap: var(--space-3);
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+}
+
+.copyright {
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+}
+
+  </style>
+</head>
+<body>
+<!--
+  固定后台 Shell。生成页面时复用此结构，只替换 #page-content。
+  页面主内容由 templates/*.template.html 生成。
+-->
+<div class="admin-shell">
+  <aside class="global-sidebar">
+    <div class="brand-mark">老板<br>管账</div>
+    <nav class="global-nav">
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▦</span><span>首页</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">◼</span><span>账户</span></a>
+      <a class="global-nav-item active" href="#"><span class="global-nav-icon">▰</span><span>交易</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">♥</span><span>服务</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▣</span><span>产品</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▤</span><span>资金</span></a>
+      <a class="global-nav-item" href="#"><span class="global-nav-icon">▥</span><span>开发</span></a>
+    </nav>
+  </aside>
+
+  <aside class="module-sidebar">
+    <div class="module-title">
+      <span>交易中心</span>
+      <span>⚙</span>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title">￥ 入账方管理</div>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title" style="color: var(--color-primary);">￥ 余额分账</div>
+      <nav class="sub-menu">
+        <a class="sub-menu-item" href="#">发起余额分账</a>
+        <a class="sub-menu-item active" href="#">余额分账规则设置</a>
+        <a class="sub-menu-item" href="#">余额分账查询</a>
+        <a class="sub-menu-item" href="#">到账信息查询</a>
+      </nav>
+    </div>
+    <div class="menu-group">
+      <div class="menu-group-title">☷ 余额分账-订单</div>
+      <div class="menu-group-title">▣ 订单分账</div>
+      <div class="menu-group-title">▤ 分账复核</div>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="topbar">
+      <div class="tabs">
+        <span>☰</span>
+        <span class="tab">首页 ×</span>
+        <span class="tab">我的账号 ×</span>
+        <span class="tab">我的账号 ×</span>
+        <span class="tab active">余额分账规则设置 ×</span>
+      </div>
+      <div class="top-actions">
+        <span>?</span>
+        <span>◐</span>
+        <span>⇩</span>
+        <span>♧</span>
+        <span class="avatar">航</span>
+        <div>
+          <div style="color: var(--text-title); font-weight: 600;">航旅无卡测试 ▾</div>
+          <div style="font-size: 12px; color: var(--text-muted);">10044439448</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="page-content" class="page">
+{{PAGE_CONTENT}}
+    </section>
+
+    <footer class="copyright">© 京ICP备08100193号　易宝支付有限公司版权所有</footer>
+  </main>
+</div>
+
+</body>
+</html>

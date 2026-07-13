@@ -1,0 +1,18 @@
+<!-- 弹窗表单模板：默认隐藏，演示时可保持显示或通过按钮触发 -->
+<div class="modal-backdrop">
+  <section class="modal">
+    <header class="modal-header">
+      <div class="modal-title">{{MODAL_TITLE}}</div>
+      <button class="btn btn-text">×</button>
+    </header>
+    <div class="modal-body">
+      <div style="display: grid; gap: 16px;">
+        {{FORM_FIELDS}}
+      </div>
+    </div>
+    <footer class="modal-footer">
+      <button class="btn">取消</button>
+      <button class="btn btn-primary">提交</button>
+    </footer>
+  </section>
+</div>

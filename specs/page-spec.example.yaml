@@ -1,0 +1,112 @@
+app:
+  module: 交易中心
+  menuPath:
+    - 交易
+    - 余额分账
+    - 余额分账规则设置
+
+shell:
+  activePrimary: 交易
+  activeSecondary: 余额分账规则设置
+  tabs:
+    - 首页
+    - 我的账号
+    - 我的账号
+    - 余额分账规则设置
+
+mainPage:
+  type: list
+  title: 余额分账规则设置
+  layout: admin-standard
+
+search:
+  collapsible: true
+  fields:
+    - label: 交易单号
+      type: input
+      value: 生效中
+    - label: 规则名称
+      type: input
+      value: "10080028707"
+    - label: 状态
+      type: select
+      value: 生效中
+    - label: 规则状态
+      type: select
+      value: 生效中
+    - label: 支流水号
+      type: input
+      value: "10080028707"
+  actions:
+    - 查询
+    - 重置
+
+summary:
+  totalCount: 24
+  activeCount: 18
+
+table:
+  columns:
+    - label: 规则名称
+      type: link
+    - label: 商户名称
+    - label: 执行分账时间
+    - label: 规则创建时间
+    - label: 创建时间
+    - label: 分账模式
+  rowActions:
+    - 修改
+    - 失效
+  pagination: true
+  horizontalScroll: true
+  sampleRows:
+    - [连锁门店分润, "10080048989", 每日00:00分账, "2025-06-11 11:35:22", "2025-06-11 11:35:22", 资金分账-多渠道资金]
+    - [联合运营, "10080048989", 每月1号00:00分账..., "2025-06-11 11:35:22", "2025-06-11 11:35:22", 资金分账-多渠道资金]
+    - [收单按月, "10080048989", 每日00:00分账, "2025-06-11 09:35:22", "2025-06-11 09:35:22", 资金分账-多渠道资金]
+
+primaryActions:
+  - label: 新增分账规则
+    type: primary
+    opens: createRuleModal
+
+interactions:
+  - id: createRuleModal
+    type: modalForm
+    title: 新增分账规则
+    fields:
+      - label: 账户类型
+        type: select
+        required: true
+        placeholder: 请选择账户类型
+      - label: 结算方式
+        type: radio
+        required: true
+        options: [仅变更卡号, 变更结算人]
+      - label: 法人结算卡
+        type: select
+        required: true
+        placeholder: 请选择
+      - label: 账户名称
+        type: input
+        required: true
+        placeholder: 请输入账户名称
+      - label: 银行账户开户行
+        type: select
+        placeholder: 请选择银行账户开户行
+      - label: 银行账户号码
+        type: input
+        required: true
+        placeholder: 请输入银行账户号码
+    submit:
+      successTarget: createSuccessPage
+
+  - id: createSuccessPage
+    type: result
+    status: success
+    title: 内容创建成功
+    description: 这是一句创建成功的描述，这是一句创建成功的描述
+    actions:
+      - label: 返回列表
+        type: primary
+      - label: 创建应用
+        type: secondary

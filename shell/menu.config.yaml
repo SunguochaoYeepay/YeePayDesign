@@ -1,0 +1,76 @@
+app:
+  name: 老板管账
+  currentModule: 交易中心
+  activePrimary: 交易
+  activeSecondary: 余额分账规则设置
+  user:
+    name: 航旅无卡测试
+    account: "10044439448"
+    avatarText: 航
+
+primaryNav:
+  - key: home
+    label: 首页
+    icon: grid
+  - key: account
+    label: 账户
+    icon: box
+  - key: trade
+    label: 交易
+    icon: layers
+  - key: service
+    label: 服务
+    icon: heart
+  - key: product
+    label: 产品
+    icon: panels
+  - key: capital
+    label: 资金
+    icon: wallet
+  - key: developer
+    label: 开发
+    icon: blocks
+
+secondaryNav:
+  module: 交易中心
+  groups:
+    - label: 入账方管理
+      icon: receipt
+      children: []
+    - label: 余额分账
+      icon: yuan
+      active: true
+      children:
+        - label: 发起余额分账
+          route: /trade/split/create
+        - label: 余额分账规则设置
+          route: /trade/split/rules
+          active: true
+        - label: 余额分账查询
+          route: /trade/split/query
+        - label: 到账信息查询
+          route: /trade/split/arrival
+    - label: 余额分账-订单
+      icon: calendar
+      children: []
+    - label: 订单分账
+      icon: calendar-check
+      children: []
+    - label: 分账复核
+      icon: file-check
+      children: []
+
+tabs:
+  - label: 首页
+    route: /home
+  - label: 我的账号
+    route: /account
+  - label: 我的账号
+    route: /account/profile
+  - label: 余额分账规则设置
+    route: /trade/split/rules
+    active: true
+
+iconPolicy:
+  source: fixed-map
+  rule: "AI 只能从本配置选择图标语义，不允许临时发明图标或改变菜单结构。"

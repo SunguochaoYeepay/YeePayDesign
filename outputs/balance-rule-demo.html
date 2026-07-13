@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>余额分账规则设置 - PoC Demo</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../design-system/components.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="global-sidebar">
+      <div class="brand-mark">老板<br>管账</div>
+      <nav class="global-nav">
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">▦</span><span>首页</span></a>
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">◼</span><span>账户</span></a>
+        <a class="global-nav-item active" href="#"><span class="global-nav-icon">▰</span><span>交易</span></a>
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">♥</span><span>服务</span></a>
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">▣</span><span>产品</span></a>
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">▤</span><span>资金</span></a>
+        <a class="global-nav-item" href="#"><span class="global-nav-icon">▥</span><span>开发</span></a>
+      </nav>
+    </aside>
+
+    <aside class="module-sidebar">
+      <div class="module-title">
+        <span>交易中心</span>
+        <span>⚙</span>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-title">￥ 入账方管理</div>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-title" style="color: var(--color-primary);">￥ 余额分账</div>
+        <nav class="sub-menu">
+          <a class="sub-menu-item" href="#">发起余额分账</a>
+          <a class="sub-menu-item active" href="#">余额分账规则设置</a>
+          <a class="sub-menu-item" href="#">余额分账查询</a>
+          <a class="sub-menu-item" href="#">到账信息查询</a>
+        </nav>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-title">☷ 余额分账-订单</div>
+        <div class="menu-group-title">▣ 订单分账</div>
+        <div class="menu-group-title">▤ 分账复核</div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="topbar">
+        <div class="tabs">
+          <span>☰</span>
+          <span class="tab">首页 ×</span>
+          <span class="tab">我的账号 ×</span>
+          <span class="tab">我的账号 ×</span>
+          <span class="tab active">余额分账规则设置 ×</span>
+        </div>
+        <div class="top-actions">
+          <span>?</span>
+          <span>◐</span>
+          <span>⇩</span>
+          <span>♧</span>
+          <span class="avatar">航</span>
+          <div>
+            <div style="color: var(--text-title); font-weight: 600;">航旅无卡测试 ▾</div>
+            <div style="font-size: 12px; color: var(--text-muted);">10044439448</div>
+          </div>
+        </div>
+      </header>
+
+      <section id="page-content" class="page">
+        <div id="list-page">
+          <section class="search-card card">
+            <div class="search-grid">
+              <div class="field">
+                <label>交易单号：</label>
+                <input class="control" value="生效中">
+              </div>
+              <div class="field">
+                <label>规则名称：</label>
+                <input class="control" value="10080028707">
+              </div>
+              <div class="field">
+                <label>状态：</label>
+                <select class="control"><option>生效中</option></select>
+              </div>
+              <div class="field">
+                <label>规则状态：</label>
+                <select class="control"><option>生效中</option></select>
+              </div>
+              <div class="field">
+                <label>支流水号：</label>
+                <input class="control" value="10080028707">
+              </div>
+            </div>
+            <div class="search-actions">
+              <button class="btn btn-text">收起 ⌃</button>
+              <button class="btn">重置</button>
+              <button class="btn btn-primary">查询</button>
+            </div>
+          </section>
+
+          <section class="table-card card">
+            <div class="table-toolbar">
+              <div class="summary">查询统计： 共 <strong>24</strong> 条规则 ｜ 生效中 <strong>18</strong> 条</div>
+              <div class="toolbar-actions">
+                <button id="open-create" class="btn btn-primary">新增分账规则</button>
+                <button class="btn">⇩</button>
+                <button class="btn">⚙</button>
+              </div>
+            </div>
+
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>规则名称</th>
+                    <th>商户名称</th>
+                    <th>执行分账时间</th>
+                    <th>规则创建时间</th>
+                    <th>创建时间</th>
+                    <th>分账模式</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="link" href="#">连锁门店分润</a></td>
+                    <td>10080048989</td>
+                    <td>每日00:00分账</td>
+                    <td>2025-06-11 11:35:22</td>
+                    <td>2025-06-11 11:35:22</td>
+                    <td>资金分账-多渠道资金</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                  <tr>
+                    <td><a class="link" href="#">联合运营</a></td>
+                    <td>10080048989</td>
+                    <td>每月1号00:00分账...</td>
+                    <td>2025-06-11 11:35:22</td>
+                    <td>2025-06-11 11:35:22</td>
+                    <td>资金分账-多渠道资金</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                  <tr>
+                    <td><a class="link" href="#">收单按月</a></td>
+                    <td>10080048989</td>
+                    <td>每日00:00分账</td>
+                    <td>2025-06-11 09:35:22</td>
+                    <td>2025-06-11 09:35:22</td>
+                    <td>资金分账-多渠道资金</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                  <tr>
+                    <td><a class="link" href="#">全部按月</a></td>
+                    <td>10080048989</td>
+                    <td>每日00:00分账</td>
+                    <td>2025-06-08 12:32:00</td>
+                    <td>2025-06-08 12:32:00</td>
+                    <td>-</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                  <tr>
+                    <td><a class="link" href="#">月周期收单</a></td>
+                    <td>10080048989</td>
+                    <td>每日00:00分账</td>
+                    <td>2025-06-07 11:35:22</td>
+                    <td>2025-06-07 11:35:22</td>
+                    <td>收单分账</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                  <tr>
+                    <td><a class="link" href="#">实时交易</a></td>
+                    <td>10080048989</td>
+                    <td>每日00:00分账</td>
+                    <td>2025-06-07 11:35:22</td>
+                    <td>2025-06-07 11:35:22</td>
+                    <td>资金分账-多渠道资金</td>
+                    <td><div class="row-actions"><a class="link" href="#">修改</a><a class="link" href="#">失效</a></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <div>共 8 条记录 第 1 / 1 页</div>
+              <div class="pages">
+                <span>‹</span>
+                <span class="page-no">1</span>
+                <span class="page-no active">2</span>
+                <span class="page-no">3</span>
+                <span class="page-no">4</span>
+                <span class="page-no">5</span>
+                <span>›</span>
+                <button class="btn">20条/页⌄</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div id="success-page" style="display: none;">
+          <section class="result-card card">
+            <div>
+              <div class="result-icon">✓</div>
+              <h1 class="result-title">内容创建成功</h1>
+              <p class="result-desc">这是一句创建成功的描述，这是一句创建成功的描述</p>
+              <div style="display: flex; justify-content: center; gap: 12px;">
+                <button id="back-list" class="btn btn-primary">返回列表</button>
+                <button class="btn">创建应用</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="copyright">© 京ICP备08100193号　易宝支付有限公司版权所有</footer>
+    </main>
+  </div>
+
+  <div id="create-modal" class="modal-backdrop" style="display: none;">
+    <section class="modal">
+      <header class="modal-header">
+        <div class="modal-title">新增分账规则</div>
+        <button id="close-modal" class="btn btn-text">×</button>
+      </header>
+      <div class="modal-body">
+        <div style="display: grid; gap: 16px;">
+          <div class="field">
+            <label><span class="required">*</span> 账户类型：</label>
+            <select class="control"><option>请选择账户类型</option></select>
+          </div>
+          <div class="field">
+            <label><span class="required">*</span> 结算方式：</label>
+            <div style="display: flex; align-items: center; gap: 20px; height: 40px;">
+              <label><input type="radio" name="settle"> 仅变更卡号</label>
+              <label><input type="radio" name="settle" checked> 变更结算人</label>
+            </div>
+          </div>
+          <div class="field">
+            <label><span class="required">*</span> 法人结算卡：</label>
+            <select class="control"><option>请选择</option></select>
+          </div>
+          <div class="field">
+            <label><span class="required">*</span> 账户名称：</label>
+            <input class="control" placeholder="请输入账户名称">
+          </div>
+          <div class="field">
+            <label>银行账户开户行：</label>
+            <select class="control"><option>请选择银行账户开户行</option></select>
+          </div>
+          <div class="field">
+            <label><span class="required">*</span> 银行账户号码：</label>
+            <input class="control" placeholder="请输入银行账户号码">
+          </div>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button id="cancel-modal" class="btn">取消</button>
+        <button id="submit-form" class="btn btn-primary">提交</button>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    const modal = document.querySelector("#create-modal");
+    const listPage = document.querySelector("#list-page");
+    const successPage = document.querySelector("#success-page");
+    document.querySelector("#open-create").onclick = () => modal.style.display = "grid";
+    document.querySelector("#close-modal").onclick = () => modal.style.display = "none";
+    document.querySelector("#cancel-modal").onclick = () => modal.style.display = "none";
+    document.querySelector("#submit-form").onclick = () => {
+      modal.style.display = "none";
+      listPage.style.display = "none";
+      successPage.style.display = "block";
+    };
+    document.querySelector("#back-list").onclick = () => {
+      successPage.style.display = "none";
+      listPage.style.display = "block";
+    };
+  </script>
+</body>
+</html>
