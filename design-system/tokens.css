@@ -36,13 +36,15 @@
   --font-weight-regular: 400;
   --font-weight-bold: 600;
 
-  --shell-icon-width: 78px;
-  --shell-menu-width: 246px;
-  --topbar-height: 56px;
+  --shell-icon-width: 92px;
+  --shell-menu-width: 284px;
+  --shell-menu-width-compact: 250px;
+  --topbar-height: 64px;
   --footer-height: 34px;
   --control-height: 40px;
   --table-row-height: 58px;
 
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --motion-fast: 120ms ease;
+  --motion-fast: 160ms ease;
+  --motion-standard: 220ms ease;
 }

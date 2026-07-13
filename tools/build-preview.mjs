@@ -10,6 +10,7 @@ const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 const tokens = read("design-system/tokens.css");
 const components = read("design-system/components.css");
 const shell = read("shell/app-shell.html");
+const shellInteractions = read("shell/shell-interactions.js");
 const contentFile = path.join(root, input);
 
 if (!fs.existsSync(contentFile)) {
@@ -44,6 +45,7 @@ ${components}
 </head>
 <body>
 ${hydratedShell}
+<script>${shellInteractions}</script>
 </body>
 </html>
 `;

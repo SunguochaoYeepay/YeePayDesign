@@ -73,4 +73,13 @@ tabs:
 
 iconPolicy:
   source: fixed-map
+  library: lucide
   rule: "AI 只能从本配置选择图标语义，不允许临时发明图标或改变菜单结构。"
+
+shellBehavior:
+  secondaryStates: [expanded, compact, collapsed]
+  defaultSecondaryState: expanded
+  primaryHover: tooltip
+  activeItem: primary-light-background
+  menuSettings: enabled
+  pinAction: enabled
