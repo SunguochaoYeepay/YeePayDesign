@@ -1,0 +1,13 @@
+<!-- 按 Page Spec 选择一个状态片段；不要与真实数据表同时显示。 -->
+<section class="content-state" data-state="{{STATE}}">
+  <div class="content-state-icon" aria-hidden="true">{{STATE_ICON}}</div>
+  <h2>{{STATE_TITLE}}</h2>
+  <p>{{STATE_DESCRIPTION}}</p>
+  <div class="content-state-actions">{{STATE_ACTIONS}}</div>
+</section>
+
+<!--
+  loading: 保留筛选区，表格区域使用骨架行。
+  empty: 示例：暂无符合条件的记录。
+  error: 示例：加载失败，请重试；保留用户已填写的筛选条件。
+-->

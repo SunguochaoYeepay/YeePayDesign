@@ -1,0 +1,37 @@
+feature:
+  id: {{FEATURE_ID}}
+  name: {{FEATURE_NAME}}
+  module: {{MODULE_NAME}}
+  goal: {{BUSINESS_GOAL}}
+
+assumptions: []
+
+menuChanges:
+  - action: add
+    parentPath: [{{PRIMARY_MENU}}, {{SECONDARY_MENU}}]
+    label: {{MENU_LABEL}}
+    route: {{ROUTE}}
+    icon: {{ICON_SEMANTIC}}
+
+pages:
+  - id: {{PAGE_ID}}
+    name: {{PAGE_NAME}}
+    route: {{ROUTE}}
+    family: list
+    menuEntry: true
+    presentation: page
+    tab: true
+    entryPoints: [menu]
+    content:
+      capabilities: [query.basic, table.toolbar, table.flat, table.rowActions, table.pagination]
+      states: [loading, empty, error]
+
+flows:
+  - from: {{SOURCE_PAGE_ID}}
+    action: {{ACTION_ID}}
+    to: {{TARGET_PAGE_ID}}
+
+delivery:
+  shell: fixed
+  pageOutput: page-content-only
+  preview: shell-injection

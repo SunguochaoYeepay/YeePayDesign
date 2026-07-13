@@ -14,6 +14,12 @@
 - `shell.activePrimary`：当前一级菜单。
 - `shell.activeSecondary`：当前二级菜单。
 - `shell.tabs`：当前打开的顶部 Tabs。
+- `page.family`：内容骨架，取值为 `list`、`form`、`detail`、`result` 或 `home`。
+- `page.presentation`：展示形式，取值为 `page`、`modal`、`drawer` 或 `inline-state`。
+- `content.capabilities`：从内容模式目录选择的能力集合。
+- `content.states`：页面必须覆盖的基础状态。
+
+内容骨架、能力、状态和组合限制必须遵循 `content-pattern-catalog.md`。不要从页面名称直接推导模板；先判断用户要完成的任务和流程位置。
 
 ## 页面类型判断
 
@@ -33,6 +39,8 @@
 - 表格操作列：默认在最右侧。
 - 主按钮：默认在表格卡片右上角。
 - 提交成功：默认进入成功结果页或关闭弹窗并刷新列表，优先根据需求上下文判断。
+- 危险操作：默认要求二次确认。
+- 所有数据页：默认补充加载、无数据和错误状态。
 
 ## 不确定时再追问
 
@@ -71,5 +79,16 @@ AI 生成页面时默认只输出：
   ...
 </section>
 ```
+
+## 内容模式引用
+
+Page Spec 生成后，按页面骨架读取对应规则：
+
+- `list`：`list-pattern-rules.md`
+- `form`：`form-pattern-rules.md`
+- `detail`：`detail-pattern-rules.md`
+- `result`：`result-pattern-rules.md`
+
+`capabilities` 必须与 `family` 匹配，且必须通过目录中的允许/禁止组合校验。
 
 如果需要完整预览，只能把内容区注入固定 Shell，不允许生成第二套 Shell。

@@ -1,0 +1,4 @@
+interface:
+  display_name: "后台功能包生成"
+  short_description: "将复杂业务需求拆解为可审核并可批量生成的多页面功能包。"
+  default_prompt: "使用 $admin-feature-pack 将下面的业务需求拆成页面清单和 Feature Spec。"

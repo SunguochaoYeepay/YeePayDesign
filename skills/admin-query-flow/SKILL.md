@@ -1,6 +1,6 @@
 ---
 name: admin-query-flow
-description: 基于老板管账后台视觉规范，生成列表查询页 + 新增弹窗表单 + 成功结果页的高保真 HTML 原型。
+description: 基于老板管账后台视觉规范和可组合内容模式，生成列表、表单、详情、结果等高保真 HTML 原型。
 ---
 
 # Admin Query Flow Skill
@@ -26,20 +26,27 @@ description: 基于老板管账后台视觉规范，生成列表查询页 + 新�
 - `templates/modal-form.template.html`
 - `templates/result.template.html`
 - `specs/page-spec-rules.md`
+- `specs/content-pattern-catalog.md`
+- `specs/list-pattern-rules.md`
+- `specs/form-pattern-rules.md`
+- `specs/detail-pattern-rules.md`
+- `specs/result-pattern-rules.md`
+- `templates/partials/`
 
 ## 工作流程
 
 1. 先理解产品需求。
 2. 输出 Page Spec。
-3. 根据 Page Spec 判断页面组合。
+3. 根据 Page Spec 判断 `page.family`、`page.presentation`、`content.capabilities` 与 `content.states`。
 4. 根据 `shell/menu.config.yaml` 确认当前菜单、Tabs、用户区，但不要重新生成 Shell。
-5. 使用列表模板生成主页面内容。
-6. 如果有新增/编辑，使用弹窗表单模板生成内容区相关弹窗。
-7. 如果有详情，使用详情模板生成分组信息和内嵌表格。
-8. 如果有提交成功，使用结果页模板生成结果状态。
-9. 默认输出 `page-content.html` 片段。
-10. 同时输出 `preview.html`，但 `preview.html` 只能通过固定 Shell 注入生成，不能手工重画 Shell。
-11. 最后给出简短自检结果。
+5. 先读取 `content-pattern-catalog.md`，确认能力组合可用，再读取相应的页面规则和 `templates/partials/` 片段。
+6. 使用局部模板按能力拼装内容区；`templates/list.template.html`、`modal-form.template.html`、`detail.template.html`、`result.template.html` 只作为兼容参考，不能限制已确认的组合。
+7. 如果有新增/编辑，依据字段规模选择弹窗、抽屉或独立表单页。
+8. 如果有详情，依据字段规模选择快速查看、抽屉或独立详情，并按规则选择锚点或区段标签。
+9. 如果有提交结果，依据结果状态与处理复杂度生成基础结果或结果摘要。
+10. 默认输出 `page-content.html` 片段。
+11. 同时输出 `preview.html`，但 `preview.html` 只能通过固定 Shell 注入生成，不能手工重画 Shell。
+12. 最后给出简短自检结果。
 
 ## 生成边界
 
@@ -110,55 +117,19 @@ Shell 可调整项只来自 `shell/menu.config.yaml`：
 
 ## 列表页规则
 
-列表页必须包含：
-
-- 搜索筛选区。
-- 查询和重置按钮。
-- 统计信息。
-- 表格工具栏。
-- 主操作按钮。
-- 表格。
-- 操作列。
-- 分页。
-
-字段过多时搜索区可以两行展示，并提供收起/展开。
+列表页根据 `list-pattern-rules.md` 选择能力。标准管理列表默认包含查询、表格、操作列和分页；摘要、指标、批量选择、展开子表、列设置按业务需要加入，不能机械堆叠。
 
 ## 弹窗表单规则
 
-弹窗表单必须包含：
-
-- 弹窗标题。
-- 表单字段。
-- 必填星号。
-- 取消按钮。
-- 提交按钮。
-
-表单字段使用统一 `.field` 结构。
+表单遵循 `form-pattern-rules.md`。字段使用统一 `.field` 结构；必须处理必填、条件显隐、首个错误定位与提交结果。弹窗仅适用于不复杂的局部操作。
 
 ## 详情页规则
 
-详情页必须包含：
-
-- 一个或多个白色详情卡片。
-- 每个详情卡片有标题。
-- 卡片内可以有多个信息分组。
-- 信息字段使用三列栅格，字段较长时允许跨列或自动换行。
-- 字段 label 和 value 必须左对齐，不能做成独立小卡片。
-- 详情中如有明细数据，使用内嵌表格。
-- 内嵌表格必须有表头、行数据和状态表达。
-- 不允许重新生成左侧菜单、顶部栏、页脚。
+详情遵循 `detail-pattern-rules.md`。默认使用三列字段栅格，长值跨列；锚点与区段标签互斥，内嵌表仅表示从属记录。
 
 ## 结果页规则
 
-结果页必须包含：
-
-- 绿色成功图标。
-- 主标题。
-- 描述文案。
-- 主按钮。
-- 次按钮。
-
-结果页仍然放在后台 Shell 内，不允许全屏展示。
+结果遵循 `result-pattern-rules.md`。必须声明 `success`、`error`、`warning` 或 `processing`；错误结果必须提供可执行的恢复动作。结果页仍然放在后台 Shell 内，不允许全屏展示。
 
 ## 输出要求
 
@@ -188,3 +159,4 @@ Shell 可调整项只来自 `shell/menu.config.yaml`：
 - 成功页是否完整。
 - 是否复用了固定 Shell。
 - 是否符合 `DESIGN.md`。
+- 能力组合和状态是否符合 `content-pattern-catalog.md`。
