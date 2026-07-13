@@ -78,4 +78,10 @@ Shell 固定
 node tools/build-preview.mjs page-content.html preview.html
 ```
 
+编辑 Shell、菜单、样式或内容区时，使用监听模式，无需每次手动重新生成：
+
+```bash
+node tools/build-preview.mjs page-content.html preview.html --watch
+```
+
 然后打开 `preview.html` 查看带样式的完整页面。

@@ -50,7 +50,7 @@ secondaryNav:
           route: /trade/split/query
         - label: 到账信息查询
           route: /trade/split/arrival
-    - label: 余额分账-订单
+    - label: 订单余额分账
       icon: calendar
       children: []
     - label: 订单分账
@@ -72,9 +72,9 @@ tabs:
     active: true
 
 iconPolicy:
-  source: fixed-map
-  library: lucide
-  rule: "AI 只能从本配置选择图标语义，不允许临时发明图标或改变菜单结构。"
+  source: semantic-map
+  preferredLibraries: [ant-design-icons, lucide]
+  rule: "图标按菜单语义从既有图标库选择；AI 不允许临时发明图标或改变菜单结构。"
 
 shellBehavior:
   secondaryStates: [expanded, compact, collapsed]
@@ -82,4 +82,17 @@ shellBehavior:
   primaryHover: tooltip
   activeItem: primary-light-background
   menuSettings: enabled
-  pinAction: enabled
+
+tabBehavior:
+  openFrom: third-level-navigation
+  duplicate: activate-existing
+  closeActive: activate-left-neighbor
+  minimumTab: home
+  homeClosable: false
+  contextActions: [refresh, close, close-others, close-right]
+  overflow: horizontal-scroll
+
+topBar:
+  tools: [help, theme, download-center, notifications]
+  unreadMessages: 11
+  accountMenu: [merchant-code, account, logout]

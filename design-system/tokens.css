@@ -36,10 +36,10 @@
   --font-weight-regular: 400;
   --font-weight-bold: 600;
 
-  --shell-icon-width: 92px;
-  --shell-menu-width: 284px;
+  --shell-icon-width: 64px;
+  --shell-menu-width: 185px;
   --shell-menu-width-compact: 250px;
-  --topbar-height: 64px;
+  --topbar-height: 48px;
   --footer-height: 34px;
   --control-height: 40px;
   --table-row-height: 58px;
