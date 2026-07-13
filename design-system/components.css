@@ -538,14 +538,16 @@ tr:hover td {
 
 .brand-mark {
   height: 80px;
-  align-content: center;
-  justify-items: center;
-  color: var(--color-primary);
-  font-size: 21px;
-  line-height: .9;
-  letter-spacing: 0;
+  display: grid;
+  place-items: center;
   text-decoration: none;
   border-bottom: 1px solid var(--border);
+}
+
+.brand-mark img {
+  display: block;
+  width: 60px;
+  height: auto;
 }
 
 .global-nav { gap: 4px; padding-top: var(--space-3); }
