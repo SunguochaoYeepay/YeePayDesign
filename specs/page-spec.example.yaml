@@ -19,6 +19,9 @@ mainPage:
   title: 余额分账规则设置
   layout: admin-standard
 
+ui:
+  platform: admin-pc-ant
+
 search:
   collapsible: true
   fields:

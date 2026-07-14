@@ -18,6 +18,7 @@
 - `page.presentation`：展示形式，取值为 `page`、`modal`、`drawer` 或 `inline-state`。
 - `content.capabilities`：从内容模式目录选择的能力集合。
 - `content.states`：页面必须覆盖的基础状态。
+- `ui.platform`：当前 PC 页面必须为 `admin-pc-ant`；移动端采用独立平台契约。
 
 内容骨架、能力、状态和组合限制必须遵循 `content-pattern-catalog.md`。不要从页面名称直接推导模板；先判断用户要完成的任务和流程位置。
 
@@ -90,5 +91,7 @@ Page Spec 生成后，按页面骨架读取对应规则：
 - `result`：`result-pattern-rules.md`
 
 `capabilities` 必须与 `family` 匹配，且必须通过目录中的允许/禁止组合校验。
+
+PC 页面生成时还必须遵循 `design-system/ANT-PC-COMPONENT-CONTRACT.md` 和 `design-system/ANT-PC-ICON-REGISTRY.md`。
 
 如果需要完整预览，只能把内容区注入固定 Shell，不允许生成第二套 Shell。

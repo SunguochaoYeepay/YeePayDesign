@@ -14,6 +14,13 @@ function extractPageInner(html) {
   return match ? match[1].trim() : html.trim();
 }
 
+function extractShellMetadata(html) {
+  const section = html.match(/<section\b[^>]*id=["']page-content["'][^>]*>/i)?.[0] || "";
+  return [...section.matchAll(/\s(data-shell-[\w-]+=(?:"[^"]*"|'[^']*'))/gi)]
+    .map((match) => match[1])
+    .join(" ");
+}
+
 function buildPreview() {
   if (!fs.existsSync(contentFile)) {
     console.error(`Missing content file: ${input}`);
@@ -24,11 +31,16 @@ function buildPreview() {
   const components = read("design-system/components.css");
   const shell = read("shell/app-shell.html");
   const shellInteractions = read("shell/shell-interactions.js");
-  const pageInner = extractPageInner(fs.readFileSync(contentFile, "utf8"));
+  const pageHtml = fs.readFileSync(contentFile, "utf8");
+  const pageInner = extractPageInner(pageHtml);
+  const shellMetadata = extractShellMetadata(pageHtml);
+  const outputFile = path.resolve(root, output);
+  const outputDir = path.dirname(outputFile);
+  const assetRoot = path.relative(outputDir, root) || ".";
   const hydratedShell = shell.replace(
     /<section id="page-content" class="page">[\s\S]*?<\/section>/,
-    `<section id="page-content" class="page">\n${pageInner}\n    </section>`
-  );
+    `<section id="page-content" class="page"${shellMetadata ? ` ${shellMetadata}` : ""}>\n${pageInner}\n    </section>`
+  ).replaceAll('src="shell/assets/', `src="${assetRoot}/shell/assets/`);
   const preview = `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -48,7 +60,7 @@ ${hydratedShell}
 </html>
 `;
 
-  fs.writeFileSync(path.join(root, output), preview);
+  fs.writeFileSync(outputFile, preview);
   console.log(`Generated ${output} from ${input}`);
   return true;
 }

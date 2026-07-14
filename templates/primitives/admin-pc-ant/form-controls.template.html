@@ -1,0 +1,22 @@
+<!-- admin-pc-ant：Select、Radio、Checkbox 的固定结构。业务页面填充占位内容，不改组件层级。 -->
+
+<!-- Select -->
+<div class="ui-select" data-component="select" data-state="default">
+  <button class="ui-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+    <span class="ui-select-value">{{SELECT_VALUE_OR_PLACEHOLDER}}</span>
+    <span class="ui-icon" data-icon="down" aria-hidden="true"></span>
+  </button>
+  <div class="ui-select-menu" role="listbox" hidden>{{SELECT_OPTIONS}}</div>
+</div>
+
+<!-- Radio group -->
+<div class="ui-radio-group" data-component="radio-group" role="radiogroup" aria-label="{{RADIO_GROUP_LABEL}}">
+  <label class="ui-radio"><input type="radio" name="{{RADIO_NAME}}" value="{{OPTION_VALUE}}"><span class="ui-radio-mark" aria-hidden="true"></span><span>{{OPTION_LABEL}}</span></label>
+</div>
+
+<!-- Checkbox -->
+<label class="ui-checkbox" data-component="checkbox">
+  <input type="checkbox" value="{{CHECKBOX_VALUE}}">
+  <span class="ui-checkbox-mark" aria-hidden="true"></span>
+  <span>{{CHECKBOX_LABEL}}</span>
+</label>

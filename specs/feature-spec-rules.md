@@ -11,6 +11,7 @@
 - `pages`：全部可见页面和独立路由页面。
 - `flows`：跨页面或跨状态动作。
 - `delivery.shell`：必须是 `fixed`。
+- `pages[].ui.platform`：页面所属平台；当前 PC 功能包为 `admin-pc-ant`。
 
 ## 页面规则
 
@@ -37,6 +38,7 @@
 
 - 单个页面仍遵循 `page-spec-rules.md`。
 - 每个页面在生成 HTML 前必须声明 `page.family`、`page.presentation`、`content.capabilities` 和 `content.states`，并遵循 `content-pattern-catalog.md`。
+- `admin-pc-ant` 页面必须遵循 `design-system/ANT-PC-COMPONENT-CONTRACT.md` 和 `design-system/ANT-PC-ICON-REGISTRY.md`。
 - 页面只输出 `#page-content`。
 - Shell、Tab、菜单、TopBar、页脚由固定框架维护。
 - 菜单变更必须作为 `menu-change.yaml` 建议输出，不能通过页面 HTML 伪造菜单。

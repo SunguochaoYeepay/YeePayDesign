@@ -21,6 +21,8 @@ pages:
     menuEntry: true
     presentation: page
     tab: true
+    ui:
+      platform: admin-pc-ant
     entryPoints: [menu]
     content:
       capabilities: [query.basic, table.toolbar, table.flat, table.rowActions, table.pagination]

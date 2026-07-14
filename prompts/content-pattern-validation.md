@@ -8,6 +8,8 @@
 - design-system/DESIGN.md
 - design-system/tokens.css
 - design-system/components.css
+- design-system/ANT-PC-COMPONENT-CONTRACT.md
+- design-system/ANT-PC-ICON-REGISTRY.md
 - shell/app-shell.html
 - shell/menu.config.yaml
 - specs/feature-spec-rules.md
@@ -19,6 +21,7 @@
 - specs/result-pattern-rules.md
 - templates/feature-spec.template.yaml
 - templates/partials/
+- templates/primitives/admin-pc-ant/
 - skills/admin-feature-pack/SKILL.md
 - skills/admin-query-flow/SKILL.md
 
@@ -30,6 +33,7 @@
 3. 区分独立路由页面与弹窗、抽屉、结果状态。三级菜单对应页面默认 tab: true；结果页默认不新增菜单和标签。
 4. 所有页面能力必须来自 content-pattern-catalog.md，并检查是否存在禁止组合。
 5. 表单需要配图时，只声明 form.illustration 的 assetKey、purpose、theme 和 assetStatus: placeholder；不要现在生成图片，也不要使用无关图片代替。
+6. 当前平台是 admin-pc-ant。所有 Select、Radio、Checkbox、Steps、DatePicker、Tooltip、Loading 和图标必须遵循 PC Ant 组件契约；禁止使用浏览器原生 Select/日期控件的视觉、浏览器默认蓝色 Radio、文字 i 或临时 SVG 图标。
 
 本阶段输出顺序必须是：
 1. 功能摘要。
@@ -55,7 +59,8 @@
 3. 根据 page.family 和 content.capabilities 选择 templates/partials/ 中的局部模板；不得只套用一张固定整页模板。
 4. 为 Page Spec 声明的 loading、empty、error 以及必要的 selected、success 等状态留下可实现结构。
 5. 表单配图仍使用 form.illustration 占位；只有我明确提供或确认 OpenDesign 生成资产后，才使用真实图片路径。
-6. 同时输出 menu-change.yaml 建议，以及功能包自检结果。
+6. 每个 PC page-spec.yaml 必须声明 ui.platform: admin-pc-ant；基础控件使用 templates/primitives/admin-pc-ant/ 的结构，图标使用 ANT-PC-ICON-REGISTRY.md 的语义名。
+7. 同时输出 menu-change.yaml 建议，以及功能包自检结果。
 
 请按以下目录组织输出：
 features/<feature-id>/

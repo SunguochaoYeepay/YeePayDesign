@@ -5,11 +5,14 @@ type: backend-dashboard
 primaryColor: "#f53f3f"
 secondaryColor: "#1677ff"
 source: "OpenDesign 导出的后台管理系统视觉规范"
+platform: admin-pc-ant
 ---
 
 # 老板管账后台管理系统视觉规范
 
 本设计系统用于生成企业级后台高保真 HTML 原型，重点服务交易中心、账户中心、资金分账、商户管理等业务页面。
+
+PC 基础控件必须遵循 `ANT-PC-COMPONENT-CONTRACT.md`；图标必须遵循 `ANT-PC-ICON-REGISTRY.md`。两份规范不适用于未来移动端。
 
 ## 1. 设计目标
 

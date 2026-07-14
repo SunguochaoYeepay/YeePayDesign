@@ -64,6 +64,8 @@ content:
 
 能力组合与禁止组合由内容模式目录约束，例如：没有批量动作不能出现选择列；锚点导航与区段标签不能同时出现；复杂表单不能塞进列表主体。
 
+PC 内容区的控件、图标和交互状态还必须遵循 [PC Ant 组件契约](design-system/ANT-PC-COMPONENT-CONTRACT.md)。该规范只服务 `admin-pc-ant`，未来移动端使用独立平台契约。
+
 ## 多页面功能包流程
 
 一次业务需求涉及菜单、列表、新增、详情、结果等多个页面时，使用 `skills/admin-feature-pack/SKILL.md`。
@@ -117,6 +119,22 @@ features/<feature-id>/
 
 插图在窄屏隐藏；不得使用照片、营销风格大图或与系统色彩冲突的素材。
 
+## 当前进度
+
+当前处于 PC 后台 PoC 的“组件规范收口与端到端验证”阶段。
+
+| 项目 | 状态 | 当前结论 |
+| --- | --- | --- |
+| 固定 PC Shell | 已完成基础版 | 菜单、TopBar、Tabs、标签关闭与预览注入已形成唯一工程源。 |
+| 内容模式与双层 Spec | 已完成 | 列表、表单、详情、结果页以骨架、能力、状态组合生成。 |
+| Feature Pack 流程 | 已完成基础链路 | 已能输出多页面 Spec、菜单变更建议和内容区产物。 |
+| PC Ant 组件契约 | 已发布，待验证 | Select、Radio、Steps、DatePicker、Tooltip、状态与图标已形成强制规则。 |
+| 余额分账规则案例 | 结构通过，待视觉复验 | 需按 `admin-pc-ant` 规则重新生成后，作为 M1 正式基线。 |
+| 详情与导入批处理案例 | 未开始 | 用于完成 M2 的模式覆盖。 |
+| 移动端 | 规划中 | 未来使用独立平台契约，例如 `mobile-h5-vant`，不复用 PC 控件规则。 |
+
+下一次验证先运行 `prompts/content-pattern-validation.md` 中的 PC Ant 控件验证，再重新生成余额分账规则功能包。通过后才能将其冻结为回归样例。
+
 ## 目录说明
 
 ```text
@@ -132,6 +150,8 @@ assets/         Logo、插图等已确认资产
 ```
 
 推荐先使用 `prompts/content-pattern-validation.md` 验证复杂业务需求的拆解与批量生成流程。
+
+PC 控件细节先用 `qa/pc-ant-component-checklist.md` 审核；该清单只适用于 `admin-pc-ant`。
 
 完整的阶段规划、验收门槛、角色边界和多端扩展策略见 [演进路线图](docs/evolution-roadmap.md)。
 

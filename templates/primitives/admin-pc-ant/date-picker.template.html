@@ -1,0 +1,10 @@
+<!-- admin-pc-ant：禁止将原生 date / datetime-local 作为可见控件。 -->
+<div class="ui-date-picker" data-component="{{DATE_COMPONENT}}" data-format="{{DATE_FORMAT}}" data-show-time="{{SHOW_TIME}}">
+  <button class="ui-date-picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+    <span class="ui-date-picker-value">{{DATE_VALUE_OR_PLACEHOLDER}}</span>
+    <span class="ui-icon" data-icon="calendar" aria-hidden="true"></span>
+  </button>
+  <section class="ui-date-picker-panel" role="dialog" aria-label="{{DATE_PICKER_LABEL}}" hidden>
+    {{DATE_PANEL_CONTENT}}
+  </section>
+</div>

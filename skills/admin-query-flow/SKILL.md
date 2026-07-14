@@ -18,6 +18,8 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 - `design-system/DESIGN.md`
 - `design-system/tokens.css`
 - `design-system/components.css`
+- `design-system/ANT-PC-COMPONENT-CONTRACT.md`
+- `design-system/ANT-PC-ICON-REGISTRY.md`
 - `shell/app-shell.html`
 - `shell/menu.config.yaml`
 - `templates/page-content.template.html`
@@ -32,15 +34,16 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 - `specs/detail-pattern-rules.md`
 - `specs/result-pattern-rules.md`
 - `templates/partials/`
+- `templates/primitives/admin-pc-ant/`
 
 ## 工作流程
 
 1. 先理解产品需求。
 2. 输出 Page Spec。
-3. 根据 Page Spec 判断 `page.family`、`page.presentation`、`content.capabilities` 与 `content.states`。
+3. 根据 Page Spec 判断 `page.family`、`page.presentation`、`content.capabilities`、`content.states` 与 `ui.platform`。
 4. 根据 `shell/menu.config.yaml` 确认当前菜单、Tabs、用户区，但不要重新生成 Shell。
 5. 先读取 `content-pattern-catalog.md`，确认能力组合可用，再读取相应的页面规则和 `templates/partials/` 片段。
-6. 使用局部模板按能力拼装内容区；`templates/list.template.html`、`modal-form.template.html`、`detail.template.html`、`result.template.html` 只作为兼容参考，不能限制已确认的组合。
+6. 使用局部模板按能力拼装内容区；PC 页面必须使用 `templates/primitives/admin-pc-ant/` 的基础控件结构和 Ant 图标语义。`templates/list.template.html`、`modal-form.template.html`、`detail.template.html`、`result.template.html` 只作为兼容参考，不能限制已确认的组合。
 7. 如果有新增/编辑，依据字段规模选择弹窗、抽屉或独立表单页。
 8. 如果有详情，依据字段规模选择快速查看、抽屉或独立详情，并按规则选择锚点或区段标签。
 9. 如果有提交结果，依据结果状态与处理复杂度生成基础结果或结果摘要。
@@ -160,3 +163,4 @@ Shell 可调整项只来自 `shell/menu.config.yaml`：
 - 是否复用了固定 Shell。
 - 是否符合 `DESIGN.md`。
 - 能力组合和状态是否符合 `content-pattern-catalog.md`。
+- `ui.platform` 是否正确，基础控件、图标和状态是否符合 PC Ant 组件契约。

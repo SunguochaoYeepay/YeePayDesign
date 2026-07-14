@@ -12,6 +12,8 @@ description: 将老板管账后台的一段自然语言业务需求拆解为可�
 - `design-system/DESIGN.md`
 - `design-system/tokens.css`
 - `design-system/components.css`
+- `design-system/ANT-PC-COMPONENT-CONTRACT.md`
+- `design-system/ANT-PC-ICON-REGISTRY.md`
 - `shell/app-shell.html`
 - `shell/menu.config.yaml`
 - `specs/feature-spec-rules.md`
@@ -28,7 +30,7 @@ description: 将老板管账后台的一段自然语言业务需求拆解为可�
 
 1. 从自然语言中识别业务目标、菜单变更、页面、路由、入口和页面间动作。
 2. 推断页面类型：`list`、`form`、`detail`、`result`、`home`；不要要求业务人员选择类型。
-3. 为每个页面写明 `page.family`、`page.presentation`、`content.capabilities` 与 `content.states`，并根据内容模式目录检查组合是否合法。
+3. 为每个页面写明 `page.family`、`page.presentation`、`content.capabilities`、`content.states` 与 `ui.platform`；当前 PC 功能包默认 `admin-pc-ant`，并根据内容模式目录检查组合是否合法。
 4. 区分独立页面与同页状态：弹窗、抽屉、成功结果通常不是独立标签。
 5. 按 `feature-spec-rules.md` 输出 `feature-spec.yaml` 和易读的页面清单。
 6. 只在关键业务信息缺失时追问；其他缺失写入 `assumptions`。
@@ -39,7 +41,7 @@ description: 将老板管账后台的一段自然语言业务需求拆解为可�
 1. 只生成已确认 `pages` 中的页面。
 2. 每个页面输出独立的 `page-spec.yaml` 和 `page-content.html`。
 3. 复用 `admin-query-flow` 的列表、表单、详情和结果模板。
-4. 根据 `family` 读取对应的页面规则和 `templates/partials/` 局部模板；页面不是套用单一整页模板，而是按已确认的能力组合生成。
+4. 根据 `family` 读取对应的页面规则、`templates/partials/` 局部模板和平台基础控件模板；PC 页面必须遵循 Ant 组件契约及图标语义，页面不是套用单一整页模板，而是按已确认的能力组合生成。
 5. 页面内容只能写入 `#page-content`，不得重画 Shell、菜单、TopBar、Tabs 或页脚。
 6. 对 `menuChanges` 生成菜单配置变更建议，但不得自由改写 `shell/app-shell.html`。
 7. 每个可路由三级菜单默认打开或激活顶部标签；同一路由不得重复开标签。
