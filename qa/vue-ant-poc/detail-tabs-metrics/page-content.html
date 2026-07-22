@@ -1,0 +1,195 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "商户经营详情-标签分组",
+    "family": "detail",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "detail.groups",
+      "detail.sectionTabs",
+      "detail.metrics",
+      "detail.embeddedTable"
+    ],
+    "states": [
+      "loading",
+      "error"
+    ]
+  },
+  "detail": {
+    "title": "商户经营详情",
+    "metrics": [
+      {
+        "key": "totalStores",
+        "label": "总商户数",
+        "value": 299
+      },
+      {
+        "key": "directStores",
+        "label": "直属商户数",
+        "value": 210
+      },
+      {
+        "key": "totalAgents",
+        "label": "总代理数",
+        "value": 60
+      },
+      {
+        "key": "directAgents",
+        "label": "直属代理数",
+        "value": 90
+      }
+    ],
+    "groups": [
+      {
+        "key": "basic",
+        "title": "基本信息",
+        "fields": [
+          {
+            "key": "merchantName",
+            "label": "商户名称",
+            "value": "宏图欣欣科技有限公司",
+            "span": 2
+          },
+          {
+            "key": "merchantType",
+            "label": "商户类型",
+            "value": "企业"
+          },
+          {
+            "key": "merchantCode",
+            "label": "商户编号",
+            "value": "10040074822"
+          },
+          {
+            "key": "directAgent",
+            "label": "直属代理",
+            "value": "易宝支付"
+          },
+          {
+            "key": "directAgentCode",
+            "label": "直属代理编号",
+            "value": "10092099981"
+          },
+          {
+            "key": "certificateNo",
+            "label": "证件编号",
+            "value": "92411023MAD24F2QOE"
+          },
+          {
+            "key": "certificateValidity",
+            "label": "证件有效期",
+            "value": "长期"
+          },
+          {
+            "key": "address",
+            "label": "详细地址",
+            "value": "北京市昌平区立汤路1009号",
+            "span": "full"
+          }
+        ]
+      },
+      {
+        "key": "product",
+        "title": "产品信息",
+        "fields": [
+          {
+            "key": "productName",
+            "label": "已开通产品",
+            "value": "余额分账"
+          },
+          {
+            "key": "productStatus",
+            "label": "产品状态",
+            "value": "已生效",
+            "format": "status",
+            "tone": "success"
+          },
+          {
+            "key": "openedAt",
+            "label": "开通时间",
+            "value": "2025-06-01 12:00:00",
+            "format": "datetime"
+          },
+          {
+            "key": "settlementProduct",
+            "label": "结算产品",
+            "value": "收单分账"
+          },
+          {
+            "key": "settlementProductStatus",
+            "label": "结算状态",
+            "value": "已生效",
+            "format": "status",
+            "tone": "success"
+          }
+        ]
+      },
+      {
+        "key": "rebate",
+        "title": "返佣信息",
+        "fields": [
+          {
+            "key": "rebateStatus",
+            "label": "返佣状态",
+            "value": "生效中",
+            "format": "status",
+            "tone": "success"
+          },
+          {
+            "key": "rebateCycle",
+            "label": "返佣周期",
+            "value": "每月1日"
+          }
+        ],
+        "table": {
+          "rowKey": "rebateId",
+          "columns": [
+            {
+              "key": "rebateAt",
+              "label": "返佣时间"
+            },
+            {
+              "key": "amount",
+              "label": "返佣金额(元)",
+              "format": "amount",
+              "currency": "CNY"
+            },
+            {
+              "key": "status",
+              "label": "状态",
+              "format": "status",
+              "statusMap": {
+                "success": {
+                  "label": "成功",
+                  "tone": "success"
+                }
+              }
+            }
+          ],
+          "rows": [
+            {
+              "rebateId": "RB001",
+              "rebateAt": "2025-06-01 00:00:00",
+              "amount": 26293.99,
+              "status": "success"
+            },
+            {
+              "rebateId": "RB002",
+              "rebateAt": "2025-05-01 00:00:00",
+              "amount": 3223.99,
+              "status": "success"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+  </script>
+</section>

@@ -1,0 +1,255 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账规则配置-变更结算人",
+    "family": "form",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "form.simple",
+      "form.steps",
+      "form.sideIllustration"
+    ],
+    "states": [
+      "loading",
+      "error"
+    ]
+  },
+  "template": {
+    "id": "form.staged-configuration"
+  },
+  "form": {
+    "fieldLayout": "single-column",
+    "sectionTitle": "结算账户信息",
+    "actions": {
+      "placement": "control-start",
+      "primaryLabel": "确认并提交"
+    },
+    "steps": [
+      {
+        "key": "rule",
+        "title": "设置分账规则",
+        "description": "填写结算账户",
+        "status": "process",
+        "fieldKeys": [
+          "accountCategory",
+          "settlementMode",
+          "bankAccountType",
+          "legalPerson",
+          "accountName",
+          "bankBranch",
+          "bankAccountNumber"
+        ]
+      },
+      {
+        "key": "recipient",
+        "title": "设置入账款则",
+        "description": "配置入账信息",
+        "status": "wait",
+        "fieldKeys": [
+          "payeeType",
+          "payeeName",
+          "splitRatio"
+        ]
+      },
+      {
+        "key": "confirm",
+        "title": "确认并完成设置",
+        "description": "核对并生效",
+        "status": "wait"
+      }
+    ],
+    "interactions": [
+      {
+        "on": "settlementMode",
+        "effect": "clear-editable-fields"
+      }
+    ],
+    "fields": [
+      {
+        "key": "accountCategory",
+        "label": "账户类型",
+        "control": "static",
+        "required": false,
+        "value": "银行卡"
+      },
+      {
+        "key": "settlementMode",
+        "label": "结算方式",
+        "control": "radio",
+        "required": true,
+        "default": "change_settler",
+        "options": [
+          {
+            "label": "仅变更卡号",
+            "value": "card_only"
+          },
+          {
+            "label": "变更结算人",
+            "value": "change_settler"
+          }
+        ],
+        "helperText": "切换结算方式将清空下方已填写内容。"
+      },
+      {
+        "key": "bankAccountType",
+        "label": "账户类型",
+        "control": "select",
+        "required": true,
+        "placeholder": "请选择账户类型",
+        "options": [
+          {
+            "label": "借记卡",
+            "value": "debit"
+          },
+          {
+            "label": "存折",
+            "value": "passbook"
+          }
+        ],
+        "helperText": "仅支持企业法人名下借记卡或存折，不支持信用卡。"
+      },
+      {
+        "key": "legalPerson",
+        "label": "法人结算卡",
+        "control": "select",
+        "required": true,
+        "placeholder": "请选择",
+        "options": [
+          {
+            "label": "张伟（已备案法人）",
+            "value": "legal_zhang_wei"
+          },
+          {
+            "label": "李敏（已备案法人）",
+            "value": "legal_li_min"
+          }
+        ]
+      },
+      {
+        "key": "accountName",
+        "label": "账户名称",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入账户名称",
+        "helperText": "需与所选法人实名完全一致。"
+      },
+      {
+        "key": "bankBranch",
+        "label": "银行账户开户行",
+        "control": "select",
+        "required": false,
+        "placeholder": "请选择银行账户开户行",
+        "options": [
+          {
+            "label": "中国工商银行北京分行",
+            "value": "icbc_beijing"
+          },
+          {
+            "label": "中国建设银行北京分行",
+            "value": "ccb_beijing"
+          },
+          {
+            "label": "招商银行北京分行",
+            "value": "cmb_beijing"
+          }
+        ],
+        "helperText": "选填；未选择可能增加后台打款校验失败风险。"
+      },
+      {
+        "key": "bankAccountNumber",
+        "label": "银行账户号码",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入银行账户号码",
+        "helperText": "仅支持数字，输入中的空格与横线将自动过滤。"
+      },
+      {
+        "key": "payeeType",
+        "label": "入账方类型",
+        "control": "radio",
+        "required": true,
+        "options": [
+          {
+            "label": "直营网点",
+            "value": "direct_store"
+          },
+          {
+            "label": "合作商户",
+            "value": "partner_merchant"
+          }
+        ]
+      },
+      {
+        "key": "payeeName",
+        "label": "入账方名称",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入入账方名称"
+      },
+      {
+        "key": "splitRatio",
+        "label": "分账比例",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入 1-100 的数字",
+        "validationRules": [
+          {
+            "type": "pattern",
+            "pattern": "^(?:[1-9][0-9]?|100)$",
+            "message": "分账比例必须为 1 至 100 的数字"
+          }
+        ]
+      }
+    ],
+    "confirmation": {
+      "step": "confirm",
+      "title": "请确认变更信息",
+      "fields": [
+        "accountCategory",
+        "settlementMode",
+        "bankAccountType",
+        "legalPerson",
+        "accountName",
+        "bankBranch",
+        "bankAccountNumber",
+        "payeeType",
+        "payeeName",
+        "splitRatio"
+      ]
+    },
+    "submit": {
+      "validationMode": "form-rules",
+      "asyncValidation": "银行卡四要素实名校验",
+      "failureSimulation": {
+        "field": "bankAccountNumber",
+        "endsWith": "0"
+      },
+      "failureBehavior": "弹窗提示账户信息不匹配，保留已填内容并返回当前页。",
+      "result": {
+        "status": "success",
+        "title": "结算账户变更已提交",
+        "description": "新结算账户将在下一结算周期生效。"
+      }
+    }
+  },
+  "illustration": {
+    "assetKey": "settlement-rule-service",
+    "purpose": "辅助解释自动分账收款账户及资金风险",
+    "theme": "自动分账服务",
+    "assetStatus": "placeholder",
+    "copy": {
+      "ariaLabel": "自动分账服务配图占位",
+      "placeholderLabel": "配图占位",
+      "title": "产品或服务标题",
+      "description": "使用此功能会按您设定好的规则执行自动分账规则，功能涉及资金操作请仔细核对。"
+    }
+  }
+}
+  </script>
+</section>

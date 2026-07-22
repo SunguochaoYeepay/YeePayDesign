@@ -1,0 +1,235 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "结算规则抽屉闭环",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.basic",
+      "summary.count",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.status",
+      "table.fixedActions",
+      "list.workflow.createDrawer",
+      "list.workflow.detailDrawer"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "fields": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称"
+      },
+      {
+        "key": "status",
+        "label": "状态",
+        "control": "select",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "生效中",
+            "value": "active"
+          },
+          {
+            "label": "待生效",
+            "value": "pending"
+          }
+        ]
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "sectionTitle": "结算规则",
+    "summary": {
+      "items": [
+        {
+          "type": "count",
+          "label": "共",
+          "suffix": "条规则"
+        }
+      ]
+    },
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "width": 220
+      },
+      {
+        "key": "merchantName",
+        "label": "商户名称",
+        "width": 240
+      },
+      {
+        "key": "status",
+        "label": "状态",
+        "format": "status",
+        "width": 120,
+        "statusMap": {
+          "active": {
+            "label": "生效中",
+            "tone": "success"
+          },
+          "pending": {
+            "label": "待生效",
+            "tone": "processing"
+          }
+        }
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true,
+        "width": 120
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增规则"
+    },
+    "rowActions": [
+      {
+        "key": "detail",
+        "label": "详情"
+      }
+    ],
+    "pagination": {
+      "total": 2,
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 1
+    },
+    "rows": [
+      {
+        "ruleId": "R001",
+        "ruleName": "华东直营网点结算",
+        "merchantName": "杭州星云商贸有限公司",
+        "status": "active"
+      },
+      {
+        "ruleId": "R002",
+        "ruleName": "联营渠道月度分润",
+        "merchantName": "上海锦程科技有限公司",
+        "status": "pending"
+      }
+    ]
+  },
+  "statistics": {},
+  "workflow": {
+    "createDrawer": {
+      "trigger": "create",
+      "title": "新增结算规则",
+      "width": 520,
+      "form": {
+        "primaryLabel": "保存",
+        "cancelLabel": "取消",
+        "fields": [
+          {
+            "key": "ruleName",
+            "label": "规则名称",
+            "control": "input",
+            "required": true,
+            "placeholder": "请输入规则名称"
+          },
+          {
+            "key": "merchantName",
+            "label": "商户名称",
+            "control": "input",
+            "required": true,
+            "placeholder": "请输入商户名称"
+          },
+          {
+            "key": "status",
+            "label": "规则状态",
+            "control": "select",
+            "required": true,
+            "default": "active",
+            "options": [
+              {
+                "label": "生效中",
+                "value": "active"
+              },
+              {
+                "label": "待生效",
+                "value": "pending"
+              }
+            ]
+          }
+        ]
+      },
+      "addRow": {
+        "keyPrefix": "R",
+        "fields": {
+          "ruleName": {
+            "from": "ruleName"
+          },
+          "merchantName": {
+            "from": "merchantName"
+          },
+          "status": {
+            "from": "status"
+          }
+        }
+      }
+    },
+    "detailDrawer": {
+      "trigger": "detail",
+      "title": "结算规则详情",
+      "width": 640,
+      "closeLabel": "关闭",
+      "groups": [
+        {
+          "key": "basic",
+          "title": "基本信息",
+          "fields": [
+            {
+              "key": "ruleId",
+              "label": "规则编号",
+              "sourceKey": "ruleId"
+            },
+            {
+              "key": "ruleName",
+              "label": "规则名称",
+              "sourceKey": "ruleName"
+            },
+            {
+              "key": "merchantName",
+              "label": "商户名称",
+              "sourceKey": "merchantName"
+            },
+            {
+              "key": "status",
+              "label": "规则状态",
+              "sourceKey": "status",
+              "format": "status",
+              "tone": "success"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+  </script>
+</section>

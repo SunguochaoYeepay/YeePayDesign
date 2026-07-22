@@ -1,0 +1,31 @@
+page:
+  name: 分账规则创建成功-基础结果
+  family: result
+  presentation: page
+  reason: 单一创建流程完成后需要明确成功反馈、后续去向和可选满意度调研。
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [result.basic, result.feedback]
+  states: [success]
+result:
+  source: 分账规则创建表单
+  status: success
+  title: 分账规则创建成功
+  description: 已保存本次分账规则，可返回规则列表继续管理。
+  actions:
+    primary: { key: returnList, label: 返回列表 }
+    secondary:
+      - { key: createAnother, label: 继续创建 }
+  feedback:
+    prompt: 本次操作体验感受如何？
+    options:
+      - { key: veryDissatisfied, label: 非常不满意 }
+      - { key: dissatisfied, label: 不满意 }
+      - { key: neutral, label: 一般 }
+      - { key: satisfied, label: 满意 }
+      - { key: verySatisfied, label: 非常满意 }
+rules:
+  - 满意度调研只用于核心成功流程，可选且不阻断返回列表或继续创建。

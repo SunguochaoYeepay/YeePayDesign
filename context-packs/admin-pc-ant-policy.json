@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "2026.07.21.3",
+  "pageFamilies": [
+    {
+      "id": "list",
+      "evidence": "查询条件、结果列、表格、导出、分页",
+      "contextPack": "admin-pc-ant-list.md",
+      "availability": "available",
+      "quickEntry": true
+    },
+    {
+      "id": "form",
+      "evidence": "新增、编辑、配置、录入、提交",
+      "contextPack": "admin-pc-ant-form.md",
+      "availability": "available",
+      "quickEntry": true
+    },
+    {
+      "id": "detail",
+      "evidence": "单据、账户、记录的查看与关联信息",
+      "contextPack": "admin-pc-ant-detail.md",
+      "availability": "available",
+      "quickEntry": true
+    },
+    {
+      "id": "result",
+      "evidence": "完成、失败、处理中及恢复动作",
+      "contextPack": "admin-pc-ant-result.md",
+      "availability": "workflow-only",
+      "quickEntry": false
+    }
+  ],
+  "validatedCombinations": [
+    {
+      "id": "form.single-stage.side-illustration",
+      "family": "form",
+      "templateId": "form.single-stage",
+      "capabilities": ["form.simple", "form.sideIllustration"],
+      "availability": "available",
+      "description": "少字段单阶段表单可使用左侧单列表单与右侧产品说明插图；仅在 768px 以下隐藏插图，不能与 form.groups 组合。"
+    },
+    {
+      "id": "list.drawer-workflow",
+      "family": "list",
+      "templateId": "list.drawer-workflow",
+      "capabilities": ["list.workflow.createDrawer", "list.workflow.detailDrawer"],
+      "availability": "available",
+      "description": "同一列表可受控地打开少字段新增表单抽屉与只读详情抽屉；保存仅在当前浏览器会话新增记录，关闭后保留列表上下文。"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+page:
+  name: 列表与简单操作验证
+  family: list
+  presentation: page
+  reason: 用于验证最小后台列表：基础查询、平铺表格、新建、查看和危险行操作。
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [query.basic, table.toolbar, table.flat, table.pagination, table.link, table.status, table.fixedActions, table.confirmAction]
+  states: [loading, empty, error]
+query:
+  defaultExpanded: true
+  fields:
+    - { key: recordNo, label: 记录编号, control: input, placeholder: 请输入记录编号, filterKey: recordNo }
+    - { key: merchantName, label: 商户名称, control: input, placeholder: 请输入商户名称, filterKey: merchantName }
+    - key: status
+      label: 状态
+      control: select
+      placeholder: 全部
+      default: all
+      options: [{ label: 全部, value: all }, { label: 生效中, value: active }, { label: 已失效, value: inactive }]
+table:
+  rowKey: recordId
+  columns:
+    - { key: recordNo, label: 记录编号, format: link, action: { key: detail, label: 查看 }, width: 188 }
+    - { key: merchantName, label: 商户名称, ellipsis: true, width: 220 }
+    - key: status
+      label: 状态
+      format: status
+      width: 120
+      statusMap:
+        active: { label: 生效中, tone: success }
+        inactive: { label: 已失效, tone: default }
+    - { key: createdAt, label: 创建时间, format: datetime, width: 180 }
+    - { key: actions, label: 操作, fixed: right, required: true, width: 136 }
+  rowActions:
+    - { key: edit, label: 修改 }
+    - { key: invalidate, label: 失效, danger: true, confirm: 确认将该记录置为失效？ }
+  primaryAction: { key: create, label: 新建记录 }
+  pagination:
+    total: 8
+    page: 1
+    pageSize: 20
+    pageCount: 1
+    pageSizeOptions: ['20', '50', '100']
+  rows:
+    - { recordId: REC001, recordNo: '202607160001', merchantName: 北京朝阳示例商户, status: active, createdAt: '2026-07-16 10:20:10' }
+    - { recordId: REC002, recordNo: '202607160002', merchantName: 上海浦东示例商户, status: active, createdAt: '2026-07-16 09:48:32' }
+    - { recordId: REC003, recordNo: '202607150001', merchantName: 广州天河示例商户, status: inactive, createdAt: '2026-07-15 18:05:24' }
+    - { recordId: REC004, recordNo: '202607150002', merchantName: 深圳南山示例商户, status: active, createdAt: '2026-07-15 16:12:08' }
+    - { recordId: REC005, recordNo: '202607140001', merchantName: 杭州西湖示例商户, status: active, createdAt: '2026-07-14 14:36:40' }
+    - { recordId: REC006, recordNo: '202607140002', merchantName: 成都高新示例商户, status: inactive, createdAt: '2026-07-14 11:22:16' }
+    - { recordId: REC007, recordNo: '202607130001', merchantName: 武汉光谷示例商户, status: active, createdAt: '2026-07-13 17:40:03' }
+    - { recordId: REC008, recordNo: '202607130002', merchantName: 南京建邺示例商户, status: active, createdAt: '2026-07-13 09:18:51' }
+assumptions:
+  - 简单列表只验证最小查询与单行操作，不包含统计卡、批量选择、展开子表或高级筛选。

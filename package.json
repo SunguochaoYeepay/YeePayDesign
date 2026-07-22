@@ -1,0 +1,43 @@
+{
+  "name": "laobanguanzhang-admin-prototype-poc",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Controlled Vue and Ant Design Vue renderer for admin prototype previews.",
+  "type": "module",
+  "scripts": {
+    "build:vue-ant-runtime": "node tools/build-vue-ant-runtime.mjs",
+    "render:vue-ant": "node tools/render-vue-ant-page.mjs",
+    "check:vue-ant": "node tools/check-vue-ant-contract.mjs",
+    "build:vue-ant-page": "node tools/build-vue-ant-page.mjs",
+    "test:css-isolation": "node qa/vue-ant-css-isolation.mjs",
+    "test:query-actions-layout": "node qa/vue-ant-query-actions-layout.mjs",
+    "test:list-summary": "node qa/vue-ant-explicit-summary.mjs",
+    "test:statistics-layout": "node qa/vue-ant-statistics-layout-selection.mjs",
+    "test:staged-flow": "node qa/vue-ant-staged-flow.mjs",
+    "test:page-surfaces": "node qa/vue-ant-page-surface.mjs",
+    "test:form-template-classification": "node qa/vue-ant-form-template-classification.mjs",
+    "test:side-illustration-responsive": "node qa/vue-ant-side-illustration-responsive.mjs",
+    "test:single-stage-illustration": "node qa/vue-ant-single-stage-illustration.mjs",
+    "test:generation-policy": "node qa/generation-policy-consistency.mjs",
+    "test:detail-drawer-layout": "node qa/vue-ant-detail-drawer-layout.mjs",
+    "test:detail-anchor-surface": "node qa/vue-ant-detail-anchor-surface.mjs",
+    "test:list-drawer-workflow": "node qa/vue-ant-list-drawer-workflow.mjs",
+    "test:demo-prompts": "node qa/demo-prompt-regression.mjs",
+    "mcp:serve": "node mcp/admin-prototype-server.mjs",
+    "mcp:gateway": "node mcp/admin-prototype-http-gateway.mjs",
+    "test:mcp": "node qa/mcp-smoke-test.mjs",
+    "test:mcp:http": "node qa/mcp-http-smoke-test.mjs"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "7.0.1",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "ant-design-vue": "4.2.6",
+    "dayjs": "1.11.19",
+    "vue": "3.5.39",
+    "yaml": "2.9.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
+}

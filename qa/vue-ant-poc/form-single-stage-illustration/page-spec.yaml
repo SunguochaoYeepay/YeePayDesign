@@ -1,0 +1,69 @@
+page:
+  name: 结算账户变更
+  family: form
+  presentation: page
+  reason: 少量独立字段一次收集提交，右侧资金说明帮助用户核对高风险账户信息。
+template:
+  id: form.single-stage
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [form.simple, form.sideIllustration]
+  states: [loading, error]
+form:
+  fieldLayout: single-column
+  sectionTitle: 变更结算账户
+  actions:
+    placement: control-start
+    primaryLabel: 提交
+  fields:
+    - { key: settlementAccount, label: 结算账户, control: static, default: 银行卡 }
+    - key: changeType
+      label: 结算方式
+      control: radio
+      required: true
+      default: change-settler
+      options:
+        - { label: 仅变更卡号, value: card-only }
+        - { label: 变更结算人, value: change-settler }
+    - key: bankCardType
+      label: 银行卡类型
+      control: select
+      required: true
+      placeholder: 请选择银行卡类型
+      options:
+        - { label: 借记卡, value: debit }
+        - { label: 存折, value: passbook }
+    - key: legalSettlementCard
+      label: 法人结算卡
+      control: select
+      required: true
+      placeholder: 请选择
+      options:
+        - { label: 陈海宁 - 尾号 1234, value: legal-card-1234 }
+        - { label: 陈海宁 - 尾号 5688, value: legal-card-5688 }
+    - { key: accountName, label: 账户名称, control: input, required: true, placeholder: 请输入账户名称 }
+    - key: bankName
+      label: 银行账户开户行
+      control: select
+      required: false
+      placeholder: 请选择银行账户开户行
+      options:
+        - { label: 中国建设银行杭州滨江支行, value: ccb-hz-binjiang }
+        - { label: 中国工商银行杭州西湖支行, value: icbc-hz-xihu }
+    - { key: bankAccountNumber, label: 银行账户号码, control: input, required: true, placeholder: 请输入银行账户号码 }
+  submit:
+    disabledUntil: [changeType, bankCardType, legalSettlementCard, accountName, bankAccountNumber]
+    successTarget: 结算账户变更提交成功
+illustration:
+  assetKey: settlement-account-funds
+  assetStatus: placeholder
+  purpose: 资金操作核对说明
+  theme: 自动分账与结算账户
+  copy:
+    title: 产品或服务标题
+    description: 使用此功能会按您设定好的规则执行自动分账规则，功能涉及资金操作请仔细核对。
+rules:
+  - 变更结算方式后清空下方可编辑账户字段并重新校验。

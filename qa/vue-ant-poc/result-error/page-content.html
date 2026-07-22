@@ -1,0 +1,40 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账规则创建失败-错误结果",
+    "family": "result",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "result.basic"
+    ],
+    "states": [
+      "error"
+    ]
+  },
+  "result": {
+    "source": "分账规则创建表单",
+    "status": "error",
+    "title": "创建失败",
+    "description": "账户信息校验未通过，请返回修改后重新提交。",
+    "actions": {
+      "primary": {
+        "key": "returnToEdit",
+        "label": "返回修改"
+      },
+      "secondary": [
+        {
+          "key": "returnList",
+          "label": "返回列表"
+        }
+      ]
+    }
+  }
+}
+  </script>
+</section>

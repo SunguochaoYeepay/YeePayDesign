@@ -17,15 +17,19 @@
 - `page.family`：内容骨架，取值为 `list`、`form`、`detail`、`result` 或 `home`。
 - `page.presentation`：展示形式，取值为 `page`、`modal`、`drawer` 或 `inline-state`。
 - `content.capabilities`：从内容模式目录选择的能力集合。
+- `template.id`：当 `page.family: form` 时必须声明，且必须与表单结构和能力组合匹配。
 - `content.states`：页面必须覆盖的基础状态。
 - `ui.platform`：当前 PC 页面必须为 `admin-pc-ant`；移动端采用独立平台契约。
 
-内容骨架、能力、状态和组合限制必须遵循 `content-pattern-catalog.md`。不要从页面名称直接推导模板；先判断用户要完成的任务和流程位置。
+内容骨架、能力、状态和组合限制必须遵循 `content-pattern-catalog.md`。不要从页面名称直接推导模板；
+表单按“导入复核闭环 -> 阶段依赖 -> 信息分组 -> 单阶段收集”的顺序选择 `template.id`。
 
 ## 页面类型判断
 
 - 出现“查询、筛选、结果列、列表、分页”：主页面为 `list`。
-- 出现“新增、编辑、填写、提交”：增加 `modalForm`、`drawerForm` 或 `formPage`。
+- 出现“新增、编辑、填写、提交”：增加 `modalForm`、`drawerForm` 或 `formPage`；若为 `form`，
+  再选择 `form.single-stage`、`form.grouped-configuration`、`form.staged-configuration` 或
+  `form.import-review-flow`。
 - 出现“查看、详情、基本信息、分组信息”：增加 `detail`。
 - 出现“成功、失败、处理中”：增加 `result`。
 - 出现“待办、快捷导航、通知、数据概览”：主页面为 `home`。

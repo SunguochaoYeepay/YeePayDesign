@@ -7,7 +7,7 @@
   --color-warning: #faad14;
   --color-error: #f53f3f;
 
-  --bg-page: #f7f8fa;
+  --bg-page: rgba(0, 0, 0, 0.04);
   --bg-surface: #ffffff;
   --bg-subtle: #f7f8fa;
   --text-title: #1d2129;

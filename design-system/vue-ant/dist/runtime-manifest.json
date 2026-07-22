@@ -1,0 +1,7 @@
+{
+  "runtime": "vue-ant",
+  "rendererVersion": 2,
+  "vue": "3.5.39",
+  "antDesignVue": "4.2.6",
+  "icons": "7.0.1"
+}

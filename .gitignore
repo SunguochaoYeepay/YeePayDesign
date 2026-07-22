@@ -3,6 +3,7 @@ node_modules/
 .env
 .env.*
 !.env.example
+mcp/local-projects.json
 
 # Local OpenDesign / browser generated scratch files.
 *.log
@@ -15,4 +16,3 @@ temp/
 /index.html
 /page-content-page-spec.yaml
 /page-content-self-check.md
-

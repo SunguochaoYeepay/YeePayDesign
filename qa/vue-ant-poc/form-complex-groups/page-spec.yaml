@@ -1,0 +1,91 @@
+page:
+  name: 商户结算配置
+  family: form
+  presentation: page
+  reason: 信息分为商户、结算和规则三个独立组，字段较多但没有强制的先后填写顺序。
+template:
+  id: form.grouped-configuration
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [form.groups, form.stickyActions]
+  states: [loading, error]
+form:
+  fieldLayout: multi-column
+  columns: 4
+  sectionTitle: 填写配置信息
+  actions:
+    placement: sticky-end
+    primaryLabel: 保存并提交
+    secondaryActions:
+      - { key: saveDraft, label: 保存草稿 }
+      - { key: cancel, label: 取消 }
+  groups:
+    - key: merchant
+      title: 商户信息
+      description: 核对签约主体和业务联系人。
+      fields:
+        - { key: merchantName, label: 商户名称, control: input, required: true, placeholder: 请输入商户全称, span: 2 }
+        - { key: merchantCode, label: 商户编号, control: static, required: false, value: M10080048989 }
+        - key: organizationType
+          label: 主体类型
+          control: select
+          required: true
+          placeholder: 请选择主体类型
+          options: [{ label: 企业法人, value: enterprise }, { label: 个体工商户, value: individualBusiness }]
+        - { key: contactName, label: 业务联系人, control: input, required: true, placeholder: 请输入联系人姓名 }
+        - key: contactMobile
+          label: 联系手机
+          control: input
+          required: true
+          placeholder: 请输入11位手机号码
+          validationRules: { pattern: '^1\\d{10}$', message: 请输入正确的手机号码 }
+        - { key: registeredAddress, label: 注册地址, control: input, required: true, placeholder: 请输入注册地址, span: 2 }
+    - key: settlement
+      title: 结算信息
+      description: 结算账户用于资金清分，请确保账户信息准确。
+      fields:
+        - key: settlementMode
+          label: 结算方式
+          control: radio
+          required: true
+          options: [{ label: 按日结算, value: daily }, { label: 按月结算, value: monthly }]
+          span: 2
+        - key: bankName
+          label: 开户银行
+          control: select
+          required: true
+          placeholder: 请选择开户银行
+          options: [{ label: 中国工商银行, value: icbc }, { label: 中国建设银行, value: ccb }, { label: 招商银行, value: cmb }]
+        - { key: bankBranch, label: 开户支行, control: input, required: true, placeholder: 请输入开户支行 }
+        - { key: bankAccountNumber, label: 结算账户号码, control: input, required: true, placeholder: 请输入10-19位账户号码, span: 2 }
+        - { key: settlementAccountName, label: 结算账户名称, control: input, required: true, placeholder: 请输入账户名称, span: 2 }
+    - key: rule
+      title: 规则信息
+      description: 设置规则生效范围和执行周期。
+      fields:
+        - { key: ruleName, label: 规则名称, control: input, required: true, placeholder: 请输入规则名称 }
+        - key: settlementCycle
+          label: 执行周期
+          control: select
+          required: true
+          placeholder: 请选择执行周期
+          options: [{ label: 每日00:00执行, value: daily }, { label: 每月1日00:00执行, value: monthly }]
+        - key: ruleScope
+          label: 适用范围
+          control: select
+          required: true
+          placeholder: 请选择适用范围
+          options: [{ label: 全部交易, value: all }, { label: 指定门店, value: stores }]
+        - { key: remark, label: 备注, control: input, required: false, placeholder: 请输入备注, span: 2 }
+  submit:
+    disabledUntil: [merchantName, organizationType, contactName, contactMobile, registeredAddress, settlementMode, bankName, bankBranch, bankAccountNumber, settlementAccountName, ruleName, settlementCycle, ruleScope]
+    validationMode: form-rules
+    successTarget: 结算规则确认页
+rules:
+  - 分组按业务对象划分，字段多但不存在跨组步骤依赖。
+  - 校验失败后定位到第一个错误字段；未提交前的草稿不生效。
+assumptions:
+  - 开户银行和适用范围使用有限原型选项，生产环境由业务接口提供。

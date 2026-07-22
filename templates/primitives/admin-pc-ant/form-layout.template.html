@@ -1,0 +1,14 @@
+<!-- admin-pc-ant：复杂 PC 表单固定使用此结构。校验规则属于 Page Spec，不直接铺在字段网格内。 -->
+<section class="ui-form-section" aria-labelledby="{{SECTION_ID}}-title">
+  <h2 id="{{SECTION_ID}}-title">{{SECTION_TITLE}}</h2>
+  <div class="ui-form-grid">
+    <div class="ui-form-field" data-field-key="{{FIELD_KEY}}" data-required="{{REQUIRED}}">
+      <label for="{{FIELD_ID}}">{{FIELD_LABEL}}</label>
+      <div class="ui-form-control-wrap">
+        {{FIELD_CONTROL}}
+        <p class="ui-field-help" hidden>{{SHORT_HELP_TEXT}}</p>
+        <p class="ui-field-error" hidden>{{ERROR_TEXT}}</p>
+      </div>
+    </div>
+  </div>
+</section>

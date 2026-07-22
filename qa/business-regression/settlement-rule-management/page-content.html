@@ -1,0 +1,274 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账规则管理",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.advanced",
+      "summary.count",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.fixedActions",
+      "table.confirmAction",
+      "table.export",
+      "table.columnSettings"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "collapsible": true,
+    "defaultExpanded": true,
+    "fields": [
+      {
+        "key": "transactionNo",
+        "label": "交易单号",
+        "control": "input",
+        "placeholder": "请输入交易单号",
+        "filterKey": "merchantName"
+      },
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称"
+      },
+      {
+        "key": "executionStatus",
+        "label": "执行状态",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "生效中",
+            "value": "active"
+          },
+          {
+            "label": "已失效",
+            "value": "expired"
+          }
+        ]
+      },
+      {
+        "key": "ruleStatus",
+        "label": "规则状态",
+        "control": "select",
+        "placeholder": "生效中",
+        "default": "active",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "生效中",
+            "value": "active"
+          },
+          {
+            "label": "待生效",
+            "value": "pending"
+          },
+          {
+            "label": "已失效",
+            "value": "expired"
+          }
+        ]
+      },
+      {
+        "key": "branchSerialNo",
+        "label": "支流水号",
+        "control": "input",
+        "placeholder": "请输入支流水号",
+        "advanced": true
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "summaryTemplate": "共 {total} 条规则，其中生效中 {active} 条",
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称"
+      },
+      {
+        "key": "merchantName",
+        "label": "商户名称"
+      },
+      {
+        "key": "executionTime",
+        "label": "执行分账时间"
+      },
+      {
+        "key": "createdAt",
+        "label": "规则创建时间"
+      },
+      {
+        "key": "updatedAt",
+        "label": "更新时间"
+      },
+      {
+        "key": "splitMode",
+        "label": "分账模式"
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true
+      }
+    ],
+    "rowActions": [
+      {
+        "key": "edit",
+        "label": "修改"
+      },
+      {
+        "key": "invalidate",
+        "label": "失效",
+        "confirm": "确认将该规则置为失效？"
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增分账规则"
+    },
+    "tools": [
+      "export",
+      "settings"
+    ],
+    "pagination": {
+      "total": 8,
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 1
+    },
+    "rows": [
+      {
+        "ruleId": "R001",
+        "ruleName": "连锁门店分润",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-11 11:35:22",
+        "updatedAt": "2025-06-11 11:35:22",
+        "splitMode": "资金分账-多渠道资金",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R002",
+        "ruleName": "联合运营",
+        "merchantName": "10080048989",
+        "executionTime": "每月 1 号 00:00 分账",
+        "createdAt": "2025-06-11 11:35:22",
+        "updatedAt": "2025-06-11 11:35:22",
+        "splitMode": "资金分账-多渠道资金",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R003",
+        "ruleName": "收单按月",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-11 09:35:22",
+        "updatedAt": "2025-06-11 09:35:22",
+        "splitMode": "资金分账-多渠道资金",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R004",
+        "ruleName": "全部按月",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-08 12:32:00",
+        "updatedAt": "2025-06-08 12:32:00",
+        "splitMode": "-",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R005",
+        "ruleName": "月周期收单",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-07 11:35:22",
+        "updatedAt": "2025-06-07 11:35:22",
+        "splitMode": "收单分账",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R006",
+        "ruleName": "实时交易",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-07 11:35:22",
+        "updatedAt": "2025-06-07 11:35:22",
+        "splitMode": "资金分账-多渠道资金",
+        "executionStatus": "active",
+        "ruleStatus": "active",
+        "active": true
+      },
+      {
+        "ruleId": "R007",
+        "ruleName": "订单金额比例",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-07 11:35:22",
+        "updatedAt": "2025-06-07 11:35:22",
+        "splitMode": "收单分账",
+        "executionStatus": "expired",
+        "ruleStatus": "expired",
+        "active": false
+      },
+      {
+        "ruleId": "R008",
+        "ruleName": "订单金额比例",
+        "merchantName": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "createdAt": "2025-06-07 11:35:22",
+        "updatedAt": "2025-06-07 11:35:22",
+        "splitMode": "-",
+        "executionStatus": "expired",
+        "ruleStatus": "expired",
+        "active": false,
+        "actions": [
+          {
+            "key": "detail",
+            "label": "详情"
+          },
+          {
+            "key": "download",
+            "label": "下载"
+          }
+        ]
+      }
+    ]
+  },
+  "statistics": {}
+}
+  </script>
+</section>

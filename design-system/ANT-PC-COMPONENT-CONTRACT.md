@@ -16,8 +16,9 @@ reference: Ant Design v5 component semantics and Ant Design Icons
 - 生成前必须读取本文件、`ANT-PC-ICON-REGISTRY.md` 和 `templates/primitives/admin-pc-ant/`。
 - 使用 `tokens.css` 中的变量；PC 默认控件高度为 `40px`，默认圆角为 `4px`。
 - 页面只能组合本规范中的基础控件。禁止为单个业务页面重新定义下拉、单选、步骤条、日期选择器、Tooltip 或状态组件的视觉语义。
-- 图标只能按图标语义表引用 Ant Design Icons；禁止使用文字 `i`、Unicode 符号、Emoji 或手绘 SVG 代替系统图标。
+- 图标只能按图标语义表引用本地 Ant SVG 精灵；禁止使用文字 `i`、Unicode 符号、Emoji、手绘 SVG 或 CSS 伪元素代替系统图标。
 - 只有业务差异可以在 `#page-content` 写局部样式；基础控件的颜色、状态和交互规则不得覆盖或改写。
+- Select、Radio、Checkbox 等基础控件行为由 `design-system/component-runtime.js` 统一提供；页面只声明结构、选项和业务后的副作用。
 
 ## 2. Token 映射
 
@@ -40,10 +41,12 @@ reference: Ant Design v5 component semantics and Ant Design Icons
 使用场景：单选枚举、可搜索枚举、远程搜索。
 
 - 使用 `ui-select` 结构和 `DownOutlined` 图标。
+- 菜单使用 `div.ui-select-menu[role="listbox"]`；选项使用纵向满宽的 `button.ui-option[role="option"][data-value]`。禁止用并排按钮、标签或 Chip 模拟下拉选项。
 - `default`、`hover`、`focus`、`disabled`、`error`、`open`、`clearable` 状态必须一致。
 - 默认文本为“全部”或明确 placeholder；不得把浏览器原生箭头作为视觉实现。
 - `remote-search` 必须有 loading、无结果、错误和清空语义。
 - 禁止直接输出未包装的 `<select class="control">` 作为最终 PC 视觉控件。
+- `component-runtime.js` 负责展开、选项提交、外部点击关闭与 Escape 关闭；页面不得为同一行为重复绑定脚本。
 
 参考：`templates/primitives/admin-pc-ant/form-controls.template.html`。
 
@@ -51,8 +54,9 @@ reference: Ant Design v5 component semantics and Ant Design Icons
 
 - Radio 和 Checkbox 均使用主色作为 `checked` 状态，禁止浏览器默认蓝。
 - 必须表达 `default`、`hover`、`checked`、`disabled`、`error`；禁用态不可误导为可点击。
-- 单选组使用 `ui-radio-group`，选择不超过一项；多选使用 `ui-checkbox-group`。
+- 单选组使用 `ui-radio-group`；每个选项必须是 `label.ui-radio > input[type="radio"] + .ui-radio-mark`，同组共用 `name`，选择不超过一项。禁止用 `button.ui-radio` 模拟单选行为；多选使用 `ui-checkbox-group`。
 - 必填是字段规则，不是 Radio 本身的颜色规则；红色星号只出现在 label。
+- `component-runtime.js` 在原生 Radio 变更后同步 `.is-checked`，避免静态类名残留导致两个选项同时显示为选中。
 
 参考：`templates/primitives/admin-pc-ant/form-controls.template.html`。
 
@@ -88,7 +92,7 @@ reference: Ant Design v5 component semantics and Ant Design Icons
 - 仅对不易理解的图标、被截断文本、指标口径使用 Tooltip。
 - 指标说明使用 `InfoCircleOutlined`，不使用字母 `i`。
 - Tooltip 只包含必要说明，不能承载关键业务操作。
-- 所有图标从 `ANT-PC-ICON-REGISTRY.md` 以语义名引用。
+- 所有图标从 `ANT-PC-ICON-REGISTRY.md` 以语义名引用，并由 `icon-runtime.js` 渲染本地精灵。
 
 ## 8. Loading、Empty、Error、Result
 
@@ -100,7 +104,38 @@ reference: Ant Design v5 component semantics and Ant Design Icons
 
 参考：`templates/primitives/admin-pc-ant/state.template.html`。
 
-## 9. Page Spec 写法
+## 9. PC 表单排版
+
+- 单列表单使用右对齐标签、统一 40px 控件和字段内操作。提交按钮紧随最后字段，并与输入控件左边对齐；不得对齐标签列或内容面左缘。普通次操作在主操作之后。
+- 步骤型配置页可使用 `form.sideIllustration`：顶部为横向 Steps，步骤条下方为左侧单列字段区和右侧产品服务插图；字段区不能再拆为两列。侧插图只使用真实登记资产或图片形态占位，不能用图标代替插图。
+- 复杂表单以 `form.groups` 表达。每个信息组使用 Ant Card 分隔，字段标签在上、控件在下；桌面端可声明 2、3 或 4 列，长字段通过 `span` 跨列，不压缩控件或字号。
+- 分组表单与批量上传/确认使用 `form.stickyActions`：次操作在左、主操作在右，操作栏横跨内容面底部。短单列表单、弹窗表单不使用粘性操作栏。
+- 帮助文本与错误文本在控件下方展示，且必须短；不得把数据源、校验策略、业务规则原文放入页面字段区。
+- 字段描述过长时，写入 Page Spec 的 `validation`、`rules` 或 `assumptions`，由前端交互在需要时提示，而不是压缩页面列宽。
+- 首步表单显示 `process / wait / wait`；`finish` 只表示已完成并离开的步骤，不表示当前步骤。
+- 960px 以下，复杂表单降为两列且侧插图转到表单之后；768px 以下隐藏侧插图；680px 以下复杂表单降为一列，粘性操作纵向排列。
+- 提交校验失败必须自动滚动到第一个错误字段并保留用户输入，不能只在页面底部显示全局错误。
+
+## 10. PC 详情与结果
+
+### 详情
+
+- 少量字段使用 Ant Modal；Modal 不承载从属表、长页滚动或复杂编辑。
+- 保留来源列表上下文时使用 Ant Drawer；详情组和从属明细可在 Drawer 内阅读，编辑进入独立表单页。
+- 独立详情默认使用 Ant Descriptions 三列布局。长值使用 2 列或全宽，字段 label 与 value 左对齐。
+- 连续相关的信息组使用 Ant Anchor；相对独立的信息组使用 Ant Tabs；两者互斥。
+- 从属退款、日志或明细使用只读 Ant Table，无筛选、分页、批量操作、嵌套展开或行跳转。
+- `status` 字段使用 Ant Badge 的语义点，不以手工颜色或文字符号表达状态。
+
+### 结果
+
+- 使用 Ant Result 表达 `success`、`error`、`warning`、`processing`；不得手工绘制状态图标。
+- 结果内容纵向居中：状态图标、标题、说明、主次动作、可选摘要、可选调研。
+- 批量或资金类结果可用浅灰两列摘要区；简单结果不添加无业务意义的摘要。
+- 错误结果必须有返回修改、重试、下载错误明细或返回列表等恢复动作。
+- 满意度调研仅用于成功核心流程，使用已登记的 Ant 图标语义，不阻断主流程。
+
+## 11. Page Spec 写法
 
 ```yaml
 ui:
@@ -125,7 +160,7 @@ form:
 
 `control` 用于业务输入类型；`component` 用于 PC 视觉与交互组件。两者不可混淆。
 
-## 10. 生成前自检
+## 12. 生成前自检
 
 - 是否声明 `ui.platform: admin-pc-ant`。
 - Select、Radio、Checkbox、Steps、DatePicker 是否使用规定组件，而不是浏览器原生视觉。
@@ -133,3 +168,6 @@ form:
 - 图标是否全部来自官方 Ant 图标语义表。
 - Loading、Empty、Error 是否互斥且可触发。
 - 是否误把 PC 组件规则应用到移动端页面。
+- 表单字段是否具备可读宽度，且未将长业务说明渲染进字段网格。
+- 详情是否按字段规模正确选择 Modal、Drawer、Anchor 页或 Tabs 页，且没有将编辑硬塞进查看界面。
+- 结果是否声明来源、状态、说明和后续动作；失败是否存在可恢复动作。

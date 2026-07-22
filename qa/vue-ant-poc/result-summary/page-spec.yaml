@@ -1,0 +1,29 @@
+page:
+  name: 分账复核完成-摘要结果
+  family: result
+  presentation: page
+  reason: 批量复核完成后需要展示可核对的数量和金额摘要，再提供后续动作。
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [result.basic, result.summary]
+  states: [success]
+result:
+  source: 分账批量复核流程
+  status: success
+  title: 复核成功
+  description: 稍后即可在转账记录中查看资金到账情况。
+  actions:
+    primary: { key: continueReview, label: 继续复核 }
+    secondary:
+      - { key: viewTransferRecords, label: 查看转账记录 }
+  summary:
+    items:
+      - { key: reviewedCount, label: 复核通过, value: 共1笔 }
+      - { key: reviewedAmount, label: 复核通过金额, value: 共10.00元 }
+      - { key: transferredCount, label: 转账受理成功, value: 共1笔 }
+      - { key: transferredAmount, label: 转账受理成功金额, value: 共10.00元 }
+rules:
+  - 摘要只表达本次批量处理的关键结果，不替代转账记录列表。

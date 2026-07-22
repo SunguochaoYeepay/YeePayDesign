@@ -1,0 +1,108 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "商户联系人配置",
+    "family": "form",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "form.simple"
+    ],
+    "states": [
+      "loading",
+      "error"
+    ]
+  },
+  "template": {
+    "id": "form.single-stage"
+  },
+  "form": {
+    "fieldLayout": "single-column",
+    "sectionTitle": "联系人信息",
+    "actions": {
+      "placement": "control-start",
+      "primaryLabel": "提交",
+      "secondaryActions": [
+        {
+          "key": "cancel",
+          "label": "取消"
+        }
+      ]
+    },
+    "fields": [
+      {
+        "key": "merchantName",
+        "label": "商户名称",
+        "control": "static",
+        "required": false,
+        "value": "北京快速商贸有限公司"
+      },
+      {
+        "key": "contactName",
+        "label": "联系人姓名",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入联系人姓名"
+      },
+      {
+        "key": "contactMobile",
+        "label": "联系手机",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入11位手机号码",
+        "validationRules": {
+          "pattern": "^1\\\\d{10}$",
+          "message": "请输入正确的手机号码"
+        }
+      },
+      {
+        "key": "notificationChannel",
+        "label": "通知方式",
+        "control": "radio",
+        "required": true,
+        "options": [
+          {
+            "label": "短信通知",
+            "value": "sms"
+          },
+          {
+            "label": "邮件通知",
+            "value": "email"
+          }
+        ]
+      },
+      {
+        "key": "email",
+        "label": "通知邮箱",
+        "control": "input",
+        "required": true,
+        "placeholder": "请输入通知邮箱"
+      },
+      {
+        "key": "remark",
+        "label": "备注",
+        "control": "input",
+        "required": false,
+        "placeholder": "请输入备注"
+      }
+    ],
+    "submit": {
+      "disabledUntil": [
+        "contactName",
+        "contactMobile",
+        "notificationChannel",
+        "email"
+      ],
+      "validationMode": "form-rules",
+      "successTarget": "商户信息页"
+    }
+  },
+  "illustration": {}
+}
+  </script>
+</section>

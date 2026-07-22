@@ -1,0 +1,66 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账规则创建成功-基础结果",
+    "family": "result",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "result.basic",
+      "result.feedback"
+    ],
+    "states": [
+      "success"
+    ]
+  },
+  "result": {
+    "source": "分账规则创建表单",
+    "status": "success",
+    "title": "分账规则创建成功",
+    "description": "已保存本次分账规则，可返回规则列表继续管理。",
+    "actions": {
+      "primary": {
+        "key": "returnList",
+        "label": "返回列表"
+      },
+      "secondary": [
+        {
+          "key": "createAnother",
+          "label": "继续创建"
+        }
+      ]
+    },
+    "feedback": {
+      "prompt": "本次操作体验感受如何？",
+      "options": [
+        {
+          "key": "veryDissatisfied",
+          "label": "非常不满意"
+        },
+        {
+          "key": "dissatisfied",
+          "label": "不满意"
+        },
+        {
+          "key": "neutral",
+          "label": "一般"
+        },
+        {
+          "key": "satisfied",
+          "label": "满意"
+        },
+        {
+          "key": "verySatisfied",
+          "label": "非常满意"
+        }
+      ]
+    }
+  }
+}
+  </script>
+</section>

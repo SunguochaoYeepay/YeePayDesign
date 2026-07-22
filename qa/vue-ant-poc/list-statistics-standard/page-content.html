@@ -1,0 +1,365 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "列表统计卡片（标准）验证",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.basic",
+      "statistics.cards",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.link",
+      "table.tags",
+      "table.status",
+      "table.amount",
+      "table.fixedActions",
+      "table.confirmAction",
+      "table.export",
+      "table.columnSettings"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "fields": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称",
+        "filterKey": "ruleName"
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "control": "input",
+        "placeholder": "请输入商户编号",
+        "filterKey": "merchantNo"
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "处理中",
+            "value": "processing"
+          },
+          {
+            "label": "待处理",
+            "value": "pending"
+          },
+          {
+            "label": "已完成",
+            "value": "completed"
+          }
+        ]
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "sectionTitle": "交易订单",
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "format": "link",
+        "action": {
+          "key": "detail",
+          "label": "查看"
+        },
+        "ellipsis": true,
+        "width": 184
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "width": 142
+      },
+      {
+        "key": "executionTime",
+        "label": "执行分账时间",
+        "ellipsis": true,
+        "width": 166
+      },
+      {
+        "key": "status",
+        "label": "支付状态",
+        "format": "status",
+        "width": 112,
+        "statusMap": {
+          "processing": {
+            "label": "处理中",
+            "tone": "processing"
+          },
+          "pending": {
+            "label": "待处理",
+            "tone": "default"
+          },
+          "completed": {
+            "label": "已完成",
+            "tone": "success"
+          }
+        }
+      },
+      {
+        "key": "createdAt",
+        "label": "规则创建时间",
+        "format": "datetime",
+        "width": 176
+      },
+      {
+        "key": "splitMode",
+        "label": "分账模式",
+        "format": "tag",
+        "width": 132,
+        "tagMap": {
+          "system": {
+            "label": "系统商户",
+            "tone": "orange"
+          },
+          "standard": {
+            "label": "标准商户",
+            "tone": "blue"
+          },
+          "enterprise": {
+            "label": "企业付款",
+            "tone": "purple"
+          }
+        }
+      },
+      {
+        "key": "totalProfit",
+        "label": "总分润",
+        "format": "amount",
+        "currency": "CNY",
+        "currencyDisplay": "prefix",
+        "precision": 2,
+        "width": 128
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true,
+        "width": 136
+      }
+    ],
+    "rowActions": [
+      {
+        "key": "edit",
+        "label": "修改"
+      },
+      {
+        "key": "invalidate",
+        "label": "失效",
+        "danger": true,
+        "confirm": "确认将该规则置为失效？"
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增分账规则"
+    },
+    "tools": [
+      "export",
+      "settings"
+    ],
+    "pagination": {
+      "total": 8,
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 1
+    },
+    "rows": [
+      {
+        "ruleId": "S001",
+        "ruleName": "连锁门店分润",
+        "merchantNo": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-16 11:35:22",
+        "splitMode": "system",
+        "directProfit": 12068.21,
+        "indirectProfit": 620.11,
+        "totalProfit": 12688.32,
+        "downstreamProfit": 320.19
+      },
+      {
+        "ruleId": "S002",
+        "ruleName": "联合运营",
+        "merchantNo": "10080048989",
+        "executionTime": "每月 1 号 00:00 分账",
+        "status": "pending",
+        "createdAt": "2026-07-15 16:20:10",
+        "splitMode": "standard",
+        "directProfit": 10320.54,
+        "indirectProfit": 560.8,
+        "totalProfit": 10881.34,
+        "downstreamProfit": 410.28
+      },
+      {
+        "ruleId": "S003",
+        "ruleName": "收单按月",
+        "merchantNo": "10080048990",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-15 09:35:22",
+        "splitMode": "system",
+        "directProfit": 8920.11,
+        "indirectProfit": 480.32,
+        "totalProfit": 9400.43,
+        "downstreamProfit": 352.97
+      },
+      {
+        "ruleId": "S004",
+        "ruleName": "全部按月",
+        "merchantNo": "10080048991",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-14 12:32:00",
+        "splitMode": "enterprise",
+        "directProfit": 7640.65,
+        "indirectProfit": 430.25,
+        "totalProfit": 8070.9,
+        "downstreamProfit": 285.6
+      },
+      {
+        "ruleId": "S005",
+        "ruleName": "月周期收单",
+        "merchantNo": "10080048992",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-14 11:35:22",
+        "splitMode": "standard",
+        "directProfit": 6850.3,
+        "indirectProfit": 390.72,
+        "totalProfit": 7241.02,
+        "downstreamProfit": 276.44
+      },
+      {
+        "ruleId": "S006",
+        "ruleName": "实时交易",
+        "merchantNo": "10080048993",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-13 18:45:11",
+        "splitMode": "standard",
+        "directProfit": 6120.4,
+        "indirectProfit": 342.18,
+        "totalProfit": 6462.58,
+        "downstreamProfit": 244.7
+      },
+      {
+        "ruleId": "S007",
+        "ruleName": "订单金额比例",
+        "merchantNo": "10080048994",
+        "executionTime": "每日 00:00 分账",
+        "status": "pending",
+        "createdAt": "2026-07-13 11:35:22",
+        "splitMode": "system",
+        "directProfit": 5310.22,
+        "indirectProfit": 298.65,
+        "totalProfit": 5608.87,
+        "downstreamProfit": 225.42
+      },
+      {
+        "ruleId": "S008",
+        "ruleName": "区域代理结算",
+        "merchantNo": "10080048995",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-12 10:18:04",
+        "splitMode": "enterprise",
+        "directProfit": 9468.57,
+        "indirectProfit": 167.97,
+        "totalProfit": 9636.54,
+        "downstreamProfit": 275.09
+      }
+    ]
+  },
+  "statistics": {
+    "layout": "standard",
+    "items": [
+      {
+        "key": "directProfit",
+        "label": "直拓分润",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "directProfit"
+        },
+        "helpText": "当前查询结果中的直拓分润金额。"
+      },
+      {
+        "key": "indirectProfit",
+        "label": "非直拓分润",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "indirectProfit"
+        },
+        "helpText": "当前查询结果中的非直拓分润金额。"
+      },
+      {
+        "key": "totalProfit",
+        "label": "总分润",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "totalProfit"
+        },
+        "helpText": "当前查询结果中的总分润金额。"
+      },
+      {
+        "key": "downstreamProfit",
+        "label": "下级分润",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "downstreamProfit"
+        },
+        "helpText": "当前查询结果中的下级分润金额。"
+      },
+      {
+        "key": "completedOrders",
+        "label": "已完成订单",
+        "unit": "笔",
+        "format": "number",
+        "aggregate": {
+          "op": "count",
+          "where": {
+            "field": "status",
+            "equals": "completed"
+          }
+        },
+        "helpText": "当前查询结果中状态为已完成的规则数。"
+      }
+    ]
+  },
+  "workflow": {}
+}
+  </script>
+</section>

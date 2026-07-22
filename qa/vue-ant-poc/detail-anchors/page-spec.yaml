@@ -1,0 +1,66 @@
+page:
+  name: 商户资料详情-锚点导航
+  family: detail
+  presentation: page
+  reason: 商户资料信息多且各组存在连续阅读关系，用户需要在同一长页内定位信息组。
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [detail.groups, detail.anchors, detail.embeddedTable]
+  states: [loading, error]
+detail:
+  title: 商户资料详情
+  groups:
+    - key: basic
+      title: 基本信息
+      fields:
+        - { key: entityType, label: 主体类型, value: 个体 }
+        - { key: merchantCode, label: 商户编号, value: '10092099981' }
+        - { key: merchantName, label: 商户名称, value: 许昌市建安区漯酒行(个体工商户) }
+        - { key: industry, label: 行业分类, value: 其他行业/其他 }
+        - { key: merchantAlias, label: 商户简称, value: 老板管账测试账户 }
+        - { key: certificateValidity, label: 商户证件有效期至, value: 长期 }
+        - { key: licenseNo, label: 商户证件编号, value: '92411023MAD24F2QOE' }
+        - { key: businessAddress, label: 商户实际经营地址, value: 河南许昌市建安区昌盛路西段88号(许昌国际发制品交易市场1号楼7层701-194室), span: full }
+    - key: legal
+      title: 法人/经营人信息
+      fields:
+        - { key: legalName, label: 法人姓名, value: 杨东桑 }
+        - { key: legalId, label: 法人证件人像面照片, value: 已上传 }
+        - { key: legalValidity, label: 法人证件有效期, value: '2026-02-09' }
+        - { key: legalIdentityNo, label: 法人证件号, value: '140302199809083375' }
+        - { key: legalBackId, label: 法人证件国徽面, value: 已上传 }
+    - key: contact
+      title: 联系人信息
+      fields:
+        - { key: contactName, label: 联系人姓名, value: 王珊珊 }
+        - { key: contactId, label: 联系人证件号码, value: '130681199309110621' }
+        - { key: servicePhone, label: 客服电话, value: '13522916133' }
+        - { key: contactEmail, label: 联系人联系邮箱, value: peishan.wang@yeepay.com }
+        - { key: contactMerchantAlias, label: 商户简称, value: 老板管账测试账户 }
+        - { key: contactValidity, label: 商户证件有效期至, value: 长期 }
+    - key: settlement
+      title: 结算与退款信息
+      fields:
+        - { key: settlementAccount, label: 结算账户, value: 已备案法人结算账户 }
+        - { key: settlementCycle, label: 结算周期, value: 每日00:00 }
+        - { key: settlementStatus, label: 结算状态, value: 生效中, format: status, tone: success }
+      table:
+        rowKey: refundId
+        columns:
+          - { key: requestAt, label: 退款请求时间 }
+          - { key: refundNo, label: 退款请求号 }
+          - { key: amount, label: 退款金额(元), format: amount, currency: CNY }
+          - key: status
+            label: 退款状态
+            format: status
+            statusMap:
+              success: { label: 成功, tone: success }
+        rows:
+          - { refundId: RF101, requestAt: '2025-06-11 10:12:30', refundNo: '10082983398', amount: 26293.99, status: success }
+          - { refundId: RF102, requestAt: '2025-06-11 13:20:12', refundNo: '10082983399', amount: 3223.99, status: success }
+rules:
+  - 锚点只服务同一详情页内连续关联的信息组，不创建新的 Shell 标签。
+  - 表格仅展示结算资料下的从属退款记录。

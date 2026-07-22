@@ -1,0 +1,575 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "列表复杂用法验证",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.advanced",
+      "query.dateRange",
+      "query.quickRanges",
+      "statistics.cards",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.link",
+      "table.tags",
+      "table.status",
+      "table.amount",
+      "table.fixedActions",
+      "table.confirmAction",
+      "table.export",
+      "table.refresh",
+      "table.columnSettings"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "collapsible": true,
+    "collapseThreshold": 6,
+    "defaultExpanded": true,
+    "defaultQuickRange": "last7days",
+    "quickRanges": [
+      "today",
+      "yesterday",
+      "last3days",
+      "last7days"
+    ],
+    "fields": [
+      {
+        "key": "createdAt",
+        "label": "创建时间",
+        "control": "date-range",
+        "filterKey": "createdAt",
+        "showTime": false,
+        "placeholder": [
+          "开始日期",
+          "结束日期"
+        ]
+      },
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称",
+        "filterKey": "ruleName"
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "control": "input",
+        "placeholder": "请输入商户编号",
+        "filterKey": "merchantNo"
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "生效中",
+            "value": "active"
+          },
+          {
+            "label": "待生效",
+            "value": "pending"
+          },
+          {
+            "label": "已失效",
+            "value": "expired"
+          }
+        ]
+      },
+      {
+        "key": "channel",
+        "label": "分账渠道",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "advanced": true,
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "线上收单",
+            "value": "online"
+          },
+          {
+            "label": "直营网点",
+            "value": "store"
+          },
+          {
+            "label": "联营渠道",
+            "value": "partner"
+          }
+        ]
+      },
+      {
+        "key": "ruleId",
+        "label": "规则编号",
+        "control": "input",
+        "placeholder": "请输入规则编号",
+        "filterKey": "ruleId",
+        "advanced": true
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "format": "link",
+        "action": {
+          "key": "detail",
+          "label": "查看"
+        },
+        "ellipsis": true,
+        "width": 184
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "ellipsis": true,
+        "width": 142
+      },
+      {
+        "key": "channels",
+        "label": "分账渠道",
+        "format": "tag",
+        "width": 148,
+        "tagMap": {
+          "online": {
+            "label": "线上收单",
+            "tone": "blue"
+          },
+          "store": {
+            "label": "直营网点",
+            "tone": "green"
+          },
+          "partner": {
+            "label": "联营渠道",
+            "tone": "gold"
+          }
+        }
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "format": "status",
+        "width": 112,
+        "statusMap": {
+          "active": {
+            "label": "生效中",
+            "tone": "success"
+          },
+          "pending": {
+            "label": "待生效",
+            "tone": "processing"
+          },
+          "expired": {
+            "label": "已失效",
+            "tone": "default"
+          }
+        }
+      },
+      {
+        "key": "pendingAmount",
+        "label": "待分账金额",
+        "format": "amount",
+        "currency": "CNY",
+        "currencyDisplay": "prefix",
+        "precision": 2,
+        "width": 142
+      },
+      {
+        "key": "createdAt",
+        "label": "创建时间",
+        "format": "datetime",
+        "width": 176
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true,
+        "width": 136
+      }
+    ],
+    "rowActions": [
+      {
+        "key": "edit",
+        "label": "修改"
+      },
+      {
+        "key": "invalidate",
+        "label": "失效",
+        "danger": true,
+        "confirm": "确认将该规则置为失效？"
+      }
+    ],
+    "secondaryActions": [
+      {
+        "key": "batchConfig",
+        "label": "批量配置"
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增分账规则"
+    },
+    "tools": [
+      "export",
+      "refresh",
+      "settings"
+    ],
+    "pagination": {
+      "total": 22,
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 2,
+      "pageSizeOptions": [
+        "20",
+        "50",
+        "100"
+      ]
+    },
+    "rows": [
+      {
+        "ruleId": "R001",
+        "ruleName": "连锁门店分润",
+        "merchantNo": "10080048989",
+        "channels": [
+          "online",
+          "store"
+        ],
+        "status": "active",
+        "pendingAmount": 12860.32,
+        "createdAt": "2026-07-16 11:35:22"
+      },
+      {
+        "ruleId": "R002",
+        "ruleName": "联合运营",
+        "merchantNo": "10080048989",
+        "channels": [
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 9820,
+        "createdAt": "2026-07-15 16:20:10"
+      },
+      {
+        "ruleId": "R003",
+        "ruleName": "收单按月",
+        "merchantNo": "10080048990",
+        "channels": [
+          "online"
+        ],
+        "status": "active",
+        "pendingAmount": 7610.5,
+        "createdAt": "2026-07-15 09:35:22"
+      },
+      {
+        "ruleId": "R004",
+        "ruleName": "全部按月",
+        "merchantNo": "10080048991",
+        "channels": [
+          "store"
+        ],
+        "status": "pending",
+        "pendingAmount": 4280,
+        "createdAt": "2026-07-14 12:32:00"
+      },
+      {
+        "ruleId": "R005",
+        "ruleName": "月周期收单",
+        "merchantNo": "10080048992",
+        "channels": [
+          "online"
+        ],
+        "status": "active",
+        "pendingAmount": 3860.06,
+        "createdAt": "2026-07-14 11:35:22"
+      },
+      {
+        "ruleId": "R006",
+        "ruleName": "实时交易",
+        "merchantNo": "10080048993",
+        "channels": [
+          "online",
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 3570.18,
+        "createdAt": "2026-07-13 18:45:11"
+      },
+      {
+        "ruleId": "R007",
+        "ruleName": "订单金额比例",
+        "merchantNo": "10080048994",
+        "channels": [
+          "store"
+        ],
+        "status": "expired",
+        "pendingAmount": 0,
+        "createdAt": "2026-07-13 11:35:22",
+        "actions": [
+          {
+            "key": "detail",
+            "label": "详情"
+          },
+          {
+            "key": "download",
+            "label": "下载"
+          }
+        ]
+      },
+      {
+        "ruleId": "R008",
+        "ruleName": "直营网点保底分成",
+        "merchantNo": "10080048995",
+        "channels": [
+          "store",
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 1210.8,
+        "createdAt": "2026-07-12 10:18:04"
+      },
+      {
+        "ruleId": "R009",
+        "ruleName": "渠道服务费抵扣",
+        "merchantNo": "10080048996",
+        "channels": [
+          "online"
+        ],
+        "status": "pending",
+        "pendingAmount": 2090,
+        "createdAt": "2026-07-12 08:44:19"
+      },
+      {
+        "ruleId": "R010",
+        "ruleName": "全国区域结算",
+        "merchantNo": "10080048997",
+        "channels": [
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 6380.44,
+        "createdAt": "2026-07-11 17:23:35"
+      },
+      {
+        "ruleId": "R011",
+        "ruleName": "月末阶梯分账",
+        "merchantNo": "10080048998",
+        "channels": [
+          "online",
+          "store"
+        ],
+        "status": "active",
+        "pendingAmount": 5280.76,
+        "createdAt": "2026-07-11 15:08:51"
+      },
+      {
+        "ruleId": "R012",
+        "ruleName": "自营交易分润",
+        "merchantNo": "10080048999",
+        "channels": [
+          "store"
+        ],
+        "status": "active",
+        "pendingAmount": 4310.2,
+        "createdAt": "2026-07-10 13:17:40"
+      },
+      {
+        "ruleId": "R013",
+        "ruleName": "联营保底结算",
+        "merchantNo": "10080049000",
+        "channels": [
+          "partner"
+        ],
+        "status": "expired",
+        "pendingAmount": 0,
+        "createdAt": "2026-07-10 11:42:23",
+        "actions": [
+          {
+            "key": "detail",
+            "label": "详情"
+          },
+          {
+            "key": "download",
+            "label": "下载"
+          }
+        ]
+      },
+      {
+        "ruleId": "R014",
+        "ruleName": "直营网点日结",
+        "merchantNo": "10080049001",
+        "channels": [
+          "store"
+        ],
+        "status": "active",
+        "pendingAmount": 2460.39,
+        "createdAt": "2026-07-10 09:12:06"
+      },
+      {
+        "ruleId": "R015",
+        "ruleName": "电商订单分成",
+        "merchantNo": "10080049002",
+        "channels": [
+          "online"
+        ],
+        "status": "pending",
+        "pendingAmount": 1840.72,
+        "createdAt": "2026-07-09 16:48:31"
+      },
+      {
+        "ruleId": "R016",
+        "ruleName": "跨区域合作结算",
+        "merchantNo": "10080049003",
+        "channels": [
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 7890,
+        "createdAt": "2026-07-09 14:26:18"
+      },
+      {
+        "ruleId": "R017",
+        "ruleName": "指定商户优惠抵扣",
+        "merchantNo": "10080049004",
+        "channels": [
+          "online",
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 1660.05,
+        "createdAt": "2026-07-09 10:33:47"
+      },
+      {
+        "ruleId": "R018",
+        "ruleName": "运营激励补贴",
+        "merchantNo": "10080049005",
+        "channels": [
+          "store"
+        ],
+        "status": "active",
+        "pendingAmount": 9330.11,
+        "createdAt": "2026-07-08 18:02:12"
+      },
+      {
+        "ruleId": "R019",
+        "ruleName": "季度结算规则",
+        "merchantNo": "10080049006",
+        "channels": [
+          "partner"
+        ],
+        "status": "pending",
+        "pendingAmount": 3150.28,
+        "createdAt": "2026-07-08 15:16:59"
+      },
+      {
+        "ruleId": "R020",
+        "ruleName": "大客户专属分账",
+        "merchantNo": "10080049007",
+        "channels": [
+          "online"
+        ],
+        "status": "active",
+        "pendingAmount": 11480.64,
+        "createdAt": "2026-07-08 09:44:02"
+      },
+      {
+        "ruleId": "R021",
+        "ruleName": "预付卡消费结算",
+        "merchantNo": "10080049008",
+        "channels": [
+          "online",
+          "store"
+        ],
+        "status": "expired",
+        "pendingAmount": 0,
+        "createdAt": "2026-07-07 17:01:28",
+        "actions": [
+          {
+            "key": "detail",
+            "label": "详情"
+          },
+          {
+            "key": "download",
+            "label": "下载"
+          }
+        ]
+      },
+      {
+        "ruleId": "R022",
+        "ruleName": "城市代理商分润",
+        "merchantNo": "10080049009",
+        "channels": [
+          "partner"
+        ],
+        "status": "active",
+        "pendingAmount": 6420.9,
+        "createdAt": "2026-07-07 11:20:43"
+      }
+    ]
+  },
+  "statistics": {
+    "layout": "standard",
+    "items": [
+      {
+        "key": "totalRules",
+        "label": "规则总数",
+        "format": "number",
+        "aggregate": {
+          "op": "count"
+        }
+      },
+      {
+        "key": "activeRules",
+        "label": "生效中规则",
+        "format": "number",
+        "aggregate": {
+          "op": "count",
+          "where": {
+            "field": "status",
+            "equals": "active"
+          }
+        }
+      },
+      {
+        "key": "pendingAmount",
+        "label": "待分账金额",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "pendingAmount"
+        }
+      }
+    ]
+  },
+  "workflow": {}
+}
+  </script>
+</section>

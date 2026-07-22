@@ -1,0 +1,46 @@
+page:
+  name: 商户联系人配置
+  family: form
+  presentation: page
+  reason: 当前任务只收集少量彼此独立的联系人信息，填写完成后一次提交，无阶段依赖或信息分组。
+template:
+  id: form.single-stage
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [form.simple]
+  states: [loading, error]
+form:
+  fieldLayout: single-column
+  sectionTitle: 联系人信息
+  actions:
+    placement: control-start
+    primaryLabel: 提交
+    secondaryActions:
+      - { key: cancel, label: 取消 }
+  fields:
+    - { key: merchantName, label: 商户名称, control: static, required: false, value: 北京快速商贸有限公司 }
+    - { key: contactName, label: 联系人姓名, control: input, required: true, placeholder: 请输入联系人姓名 }
+    - key: contactMobile
+      label: 联系手机
+      control: input
+      required: true
+      placeholder: 请输入11位手机号码
+      validationRules: { pattern: '^1\\d{10}$', message: 请输入正确的手机号码 }
+    - key: notificationChannel
+      label: 通知方式
+      control: radio
+      required: true
+      options: [{ label: 短信通知, value: sms }, { label: 邮件通知, value: email }]
+    - { key: email, label: 通知邮箱, control: input, required: true, placeholder: 请输入通知邮箱 }
+    - { key: remark, label: 备注, control: input, required: false, placeholder: 请输入备注 }
+  submit:
+    disabledUntil: [contactName, contactMobile, notificationChannel, email]
+    validationMode: form-rules
+    successTarget: 商户信息页
+rules:
+  - 联系手机用于业务通知，提交前需完成格式校验。
+assumptions:
+  - 原型中的商户名称为固定示例数据，生产环境从商户主体接口读取。

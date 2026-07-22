@@ -1,0 +1,457 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "父表展开子表验证",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.basic",
+      "summary.count",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.link",
+      "table.status",
+      "table.amount",
+      "table.fixedActions",
+      "table.confirmAction",
+      "table.expandable",
+      "table.export",
+      "table.refresh",
+      "table.columnSettings"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "fields": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称",
+        "filterKey": "ruleName"
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "生效中",
+            "value": "active"
+          },
+          {
+            "label": "待生效",
+            "value": "pending"
+          },
+          {
+            "label": "已失效",
+            "value": "expired"
+          }
+        ]
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "summaryTemplate": "共 {total} 条规则，其中生效中 {active} 条",
+    "expandable": {
+      "mode": "multiple",
+      "defaultExpanded": false,
+      "childRowsKey": "childRows",
+      "childTable": {
+        "rowKey": "entryId",
+        "columns": [
+          {
+            "key": "entryName",
+            "label": "入账方名称",
+            "ellipsis": true,
+            "width": 220
+          },
+          {
+            "key": "accountType",
+            "label": "账户类型",
+            "width": 120
+          },
+          {
+            "key": "accountNo",
+            "label": "收款账户",
+            "ellipsis": true,
+            "width": 188
+          },
+          {
+            "key": "splitAmount",
+            "label": "分账金额",
+            "format": "amount",
+            "currency": "CNY",
+            "currencyDisplay": "prefix",
+            "precision": 2,
+            "width": 148
+          },
+          {
+            "key": "updatedAt",
+            "label": "最近更新时间",
+            "format": "datetime",
+            "width": 176
+          }
+        ]
+      }
+    },
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "format": "link",
+        "action": {
+          "key": "detail",
+          "label": "查看"
+        },
+        "ellipsis": true,
+        "width": 190
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "width": 142
+      },
+      {
+        "key": "executionTime",
+        "label": "执行分账时间",
+        "ellipsis": true,
+        "width": 172
+      },
+      {
+        "key": "splitAmount",
+        "label": "单日预计分账",
+        "format": "amount",
+        "currency": "CNY",
+        "currencyDisplay": "prefix",
+        "precision": 2,
+        "width": 150
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "format": "status",
+        "width": 112,
+        "statusMap": {
+          "active": {
+            "label": "生效中",
+            "tone": "success"
+          },
+          "pending": {
+            "label": "待生效",
+            "tone": "processing"
+          },
+          "expired": {
+            "label": "已失效",
+            "tone": "default"
+          }
+        }
+      },
+      {
+        "key": "updatedAt",
+        "label": "最近更新时间",
+        "format": "datetime",
+        "width": 176
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true,
+        "width": 136
+      }
+    ],
+    "rowActions": [
+      {
+        "key": "edit",
+        "label": "修改"
+      },
+      {
+        "key": "invalidate",
+        "label": "失效",
+        "danger": true,
+        "confirm": "确认将该规则置为失效？"
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增分账规则"
+    },
+    "tools": [
+      "export",
+      "refresh",
+      "settings"
+    ],
+    "pagination": {
+      "total": 12,
+      "page": 1,
+      "pageSize": 8,
+      "pageCount": 2,
+      "pageSizeOptions": [
+        "8",
+        "20",
+        "50"
+      ]
+    },
+    "rows": [
+      {
+        "ruleId": "E001",
+        "ruleName": "连锁门店分润",
+        "merchantNo": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 12860.32,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-16 11:35:22",
+        "childRows": [
+          {
+            "entryId": "E001-01",
+            "entryName": "北京朝阳门店",
+            "accountType": "对公账户",
+            "accountNo": "6222 **** **** 5831",
+            "splitAmount": 6820.16,
+            "updatedAt": "2026-07-16 11:35:22"
+          },
+          {
+            "entryId": "E001-02",
+            "entryName": "北京海淀门店",
+            "accountType": "对公账户",
+            "accountNo": "6222 **** **** 9418",
+            "splitAmount": 6040.16,
+            "updatedAt": "2026-07-16 11:35:22"
+          }
+        ]
+      },
+      {
+        "ruleId": "E002",
+        "ruleName": "联合运营",
+        "merchantNo": "10080048989",
+        "executionTime": "每月 1 号 00:00 分账",
+        "splitAmount": 9820,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-15 16:20:10",
+        "childRows": [
+          {
+            "entryId": "E002-01",
+            "entryName": "联合运营主体",
+            "accountType": "对公账户",
+            "accountNo": "6214 **** **** 2286",
+            "splitAmount": 9820,
+            "updatedAt": "2026-07-15 16:20:10"
+          }
+        ]
+      },
+      {
+        "ruleId": "E003",
+        "ruleName": "收单按月",
+        "merchantNo": "10080048990",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 7610.5,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-15 09:35:22",
+        "childRows": []
+      },
+      {
+        "ruleId": "E004",
+        "ruleName": "全部按月",
+        "merchantNo": "10080048991",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 4280,
+        "status": "pending",
+        "active": false,
+        "updatedAt": "2026-07-14 12:32:00",
+        "childRows": [
+          {
+            "entryId": "E004-01",
+            "entryName": "华东区域结算中心",
+            "accountType": "对公账户",
+            "accountNo": "6228 **** **** 3342",
+            "splitAmount": 2140,
+            "updatedAt": "2026-07-14 12:32:00"
+          },
+          {
+            "entryId": "E004-02",
+            "entryName": "华南区域结算中心",
+            "accountType": "对公账户",
+            "accountNo": "6228 **** **** 3343",
+            "splitAmount": 2140,
+            "updatedAt": "2026-07-14 12:32:00"
+          }
+        ]
+      },
+      {
+        "ruleId": "E005",
+        "ruleName": "月周期收单",
+        "merchantNo": "10080048992",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 3860.06,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-14 11:35:22",
+        "childRows": [
+          {
+            "entryId": "E005-01",
+            "entryName": "收单业务主体",
+            "accountType": "对私账户",
+            "accountNo": "6217 **** **** 5799",
+            "splitAmount": 3860.06,
+            "updatedAt": "2026-07-14 11:35:22"
+          }
+        ]
+      },
+      {
+        "ruleId": "E006",
+        "ruleName": "实时交易",
+        "merchantNo": "10080048993",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 3570.18,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-13 18:45:11",
+        "childRows": []
+      },
+      {
+        "ruleId": "E007",
+        "ruleName": "订单金额比例",
+        "merchantNo": "10080048994",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 0,
+        "status": "expired",
+        "active": false,
+        "updatedAt": "2026-07-13 11:35:22",
+        "childRows": [
+          {
+            "entryId": "E007-01",
+            "entryName": "历史入账主体",
+            "accountType": "对公账户",
+            "accountNo": "6225 **** **** 1108",
+            "splitAmount": 0,
+            "updatedAt": "2026-07-13 11:35:22"
+          }
+        ]
+      },
+      {
+        "ruleId": "E008",
+        "ruleName": "直营网点保底分成",
+        "merchantNo": "10080048995",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 1210.8,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-12 10:18:04",
+        "childRows": [
+          {
+            "entryId": "E008-01",
+            "entryName": "上海徐汇门店",
+            "accountType": "对公账户",
+            "accountNo": "6210 **** **** 4662",
+            "splitAmount": 605.4,
+            "updatedAt": "2026-07-12 10:18:04"
+          },
+          {
+            "entryId": "E008-02",
+            "entryName": "上海静安门店",
+            "accountType": "对公账户",
+            "accountNo": "6210 **** **** 4663",
+            "splitAmount": 605.4,
+            "updatedAt": "2026-07-12 10:18:04"
+          }
+        ]
+      },
+      {
+        "ruleId": "E009",
+        "ruleName": "渠道服务费抵扣",
+        "merchantNo": "10080048996",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 2090,
+        "status": "pending",
+        "active": false,
+        "updatedAt": "2026-07-12 08:44:19",
+        "childRows": [
+          {
+            "entryId": "E009-01",
+            "entryName": "渠道服务商",
+            "accountType": "对公账户",
+            "accountNo": "6219 **** **** 8042",
+            "splitAmount": 2090,
+            "updatedAt": "2026-07-12 08:44:19"
+          }
+        ]
+      },
+      {
+        "ruleId": "E010",
+        "ruleName": "全国区域结算",
+        "merchantNo": "10080048997",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 6380.44,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-11 17:23:35",
+        "childRows": []
+      },
+      {
+        "ruleId": "E011",
+        "ruleName": "月末阶梯分账",
+        "merchantNo": "10080048998",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 5280.76,
+        "status": "active",
+        "active": true,
+        "updatedAt": "2026-07-11 15:08:51",
+        "childRows": [
+          {
+            "entryId": "E011-01",
+            "entryName": "一级渠道结算主体",
+            "accountType": "对公账户",
+            "accountNo": "6227 **** **** 9231",
+            "splitAmount": 3520.51,
+            "updatedAt": "2026-07-11 15:08:51"
+          },
+          {
+            "entryId": "E011-02",
+            "entryName": "二级渠道结算主体",
+            "accountType": "对私账户",
+            "accountNo": "6216 **** **** 1168",
+            "splitAmount": 1760.25,
+            "updatedAt": "2026-07-11 15:08:51"
+          }
+        ]
+      },
+      {
+        "ruleId": "E012",
+        "ruleName": "自营交易分润",
+        "merchantNo": "10080048999",
+        "executionTime": "每日 00:00 分账",
+        "splitAmount": 4310.2,
+        "status": "expired",
+        "active": false,
+        "updatedAt": "2026-07-10 13:17:40",
+        "childRows": []
+      }
+    ]
+  },
+  "statistics": {},
+  "workflow": {}
+}
+  </script>
+</section>

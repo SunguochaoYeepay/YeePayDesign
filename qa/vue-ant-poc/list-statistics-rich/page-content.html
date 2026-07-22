@@ -1,0 +1,364 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "列表统计卡片（富卡片）验证",
+    "family": "list",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "query.basic",
+      "statistics.cards",
+      "statistics.cards.rich",
+      "table.toolbar",
+      "table.flat",
+      "table.pagination",
+      "table.link",
+      "table.tags",
+      "table.status",
+      "table.fixedActions",
+      "table.confirmAction",
+      "table.export",
+      "table.columnSettings"
+    ],
+    "states": [
+      "loading",
+      "empty",
+      "error"
+    ]
+  },
+  "query": {
+    "fields": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "control": "input",
+        "placeholder": "请输入规则名称",
+        "filterKey": "ruleName"
+      },
+      {
+        "key": "status",
+        "label": "规则状态",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "处理中",
+            "value": "processing"
+          },
+          {
+            "label": "待处理",
+            "value": "pending"
+          },
+          {
+            "label": "已完成",
+            "value": "completed"
+          }
+        ]
+      },
+      {
+        "key": "splitMode",
+        "label": "分账模式",
+        "control": "select",
+        "placeholder": "全部",
+        "default": "all",
+        "options": [
+          {
+            "label": "全部",
+            "value": "all"
+          },
+          {
+            "label": "系统商户",
+            "value": "system"
+          },
+          {
+            "label": "标准商户",
+            "value": "standard"
+          },
+          {
+            "label": "企业付款",
+            "value": "enterprise"
+          }
+        ]
+      }
+    ]
+  },
+  "table": {
+    "rowKey": "ruleId",
+    "sectionTitle": "交易订单",
+    "columns": [
+      {
+        "key": "ruleName",
+        "label": "规则名称",
+        "format": "link",
+        "action": {
+          "key": "detail",
+          "label": "查看"
+        },
+        "ellipsis": true,
+        "width": 184
+      },
+      {
+        "key": "merchantNo",
+        "label": "商户编号",
+        "width": 142
+      },
+      {
+        "key": "executionTime",
+        "label": "执行分账时间",
+        "ellipsis": true,
+        "width": 166
+      },
+      {
+        "key": "status",
+        "label": "支付状态",
+        "format": "status",
+        "width": 112,
+        "statusMap": {
+          "processing": {
+            "label": "处理中",
+            "tone": "processing"
+          },
+          "pending": {
+            "label": "待处理",
+            "tone": "default"
+          },
+          "completed": {
+            "label": "已完成",
+            "tone": "success"
+          }
+        }
+      },
+      {
+        "key": "createdAt",
+        "label": "规则创建时间",
+        "format": "datetime",
+        "width": 176
+      },
+      {
+        "key": "splitMode",
+        "label": "分账模式",
+        "format": "tag",
+        "width": 132,
+        "tagMap": {
+          "system": {
+            "label": "系统商户",
+            "tone": "orange"
+          },
+          "standard": {
+            "label": "标准商户",
+            "tone": "blue"
+          },
+          "enterprise": {
+            "label": "企业付款",
+            "tone": "purple"
+          }
+        }
+      },
+      {
+        "key": "actions",
+        "label": "操作",
+        "fixed": "right",
+        "required": true,
+        "width": 136
+      }
+    ],
+    "rowActions": [
+      {
+        "key": "edit",
+        "label": "修改"
+      },
+      {
+        "key": "invalidate",
+        "label": "失效",
+        "danger": true,
+        "confirm": "确认将该规则置为失效？"
+      }
+    ],
+    "primaryAction": {
+      "key": "create",
+      "label": "新增分账规则"
+    },
+    "tools": [
+      "export",
+      "settings"
+    ],
+    "pagination": {
+      "total": 8,
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 1
+    },
+    "rows": [
+      {
+        "ruleId": "R001",
+        "ruleName": "连锁门店分润",
+        "merchantNo": "10080048989",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-16 11:35:22",
+        "splitMode": "system",
+        "transactionAmount": 12680.4,
+        "settlementAmount": 6840.2,
+        "feeAmount": 64.12
+      },
+      {
+        "ruleId": "R002",
+        "ruleName": "联合运营",
+        "merchantNo": "10080048989",
+        "executionTime": "每月 1 号 00:00 分账",
+        "status": "pending",
+        "createdAt": "2026-07-15 16:20:10",
+        "splitMode": "standard",
+        "transactionAmount": 9820.1,
+        "settlementAmount": 4920.5,
+        "feeAmount": 48.9
+      },
+      {
+        "ruleId": "R003",
+        "ruleName": "收单按月",
+        "merchantNo": "10080048990",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-15 09:35:22",
+        "splitMode": "system",
+        "transactionAmount": 7610.35,
+        "settlementAmount": 4060.12,
+        "feeAmount": 38.02
+      },
+      {
+        "ruleId": "R004",
+        "ruleName": "全部按月",
+        "merchantNo": "10080048991",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-14 12:32:00",
+        "splitMode": "enterprise",
+        "transactionAmount": 6580.2,
+        "settlementAmount": 3260.7,
+        "feeAmount": 32.9
+      },
+      {
+        "ruleId": "R005",
+        "ruleName": "月周期收单",
+        "merchantNo": "10080048992",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-14 11:35:22",
+        "splitMode": "standard",
+        "transactionAmount": 5420.8,
+        "settlementAmount": 2710.4,
+        "feeAmount": 27.1
+      },
+      {
+        "ruleId": "R006",
+        "ruleName": "实时交易",
+        "merchantNo": "10080048993",
+        "executionTime": "每日 00:00 分账",
+        "status": "processing",
+        "createdAt": "2026-07-13 18:45:11",
+        "splitMode": "standard",
+        "transactionAmount": 4980.5,
+        "settlementAmount": 2490.25,
+        "feeAmount": 24.9
+      },
+      {
+        "ruleId": "R007",
+        "ruleName": "订单金额比例",
+        "merchantNo": "10080048994",
+        "executionTime": "每日 00:00 分账",
+        "status": "pending",
+        "createdAt": "2026-07-13 11:35:22",
+        "splitMode": "system",
+        "transactionAmount": 3860.75,
+        "settlementAmount": 1930.38,
+        "feeAmount": 19.3
+      },
+      {
+        "ruleId": "R008",
+        "ruleName": "区域代理结算",
+        "merchantNo": "10080048995",
+        "executionTime": "每日 00:00 分账",
+        "status": "completed",
+        "createdAt": "2026-07-12 10:18:04",
+        "splitMode": "enterprise",
+        "transactionAmount": 5745.9,
+        "settlementAmount": 2872.95,
+        "feeAmount": 28.7
+      }
+    ]
+  },
+  "statistics": {
+    "layout": "rich",
+    "items": [
+      {
+        "key": "transactionAmount",
+        "label": "交易总金额",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "transactionAmount"
+        },
+        "helpText": "当前查询结果中的交易金额汇总。",
+        "detailItems": [
+          "共 6",
+          "000 笔"
+        ],
+        "action": {
+          "key": "viewTransactionDetails",
+          "label": "查看明细"
+        }
+      },
+      {
+        "key": "settlementAmount",
+        "label": "结算总金额",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "settlementAmount"
+        },
+        "helpText": "当前查询结果中的待结算和已结算金额汇总。",
+        "detailItems": [
+          "共 3",
+          "200 笔",
+          "待结算 698.00 元"
+        ],
+        "action": {
+          "key": "settleNow",
+          "label": "立即结算"
+        }
+      },
+      {
+        "key": "feeAmount",
+        "label": "手续费总金额",
+        "unit": "元",
+        "format": "amount",
+        "aggregate": {
+          "op": "sum",
+          "field": "feeAmount"
+        },
+        "helpText": "当前查询结果关联的手续费汇总。",
+        "detailItems": [
+          "账单欠费 98.00 元"
+        ],
+        "action": {
+          "key": "rechargeNow",
+          "label": "立即充值"
+        }
+      }
+    ]
+  }
+}
+  </script>
+</section>

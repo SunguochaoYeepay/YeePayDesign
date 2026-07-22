@@ -1,0 +1,238 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账订单详情-抽屉查看",
+    "family": "detail",
+    "presentation": "drawer"
+  },
+  "content": {
+    "capabilities": [
+      "detail.groups",
+      "detail.embeddedTable",
+      "detail.actions"
+    ],
+    "states": [
+      "loading",
+      "error"
+    ]
+  },
+  "detail": {
+    "title": "订单详情",
+    "groups": [
+      {
+        "key": "order",
+        "title": "订单信息",
+        "fields": [
+          {
+            "key": "merchantName",
+            "label": "商户简称",
+            "value": "签约名10080028707"
+          },
+          {
+            "key": "splitStatus",
+            "label": "分账状态",
+            "value": "部分成功",
+            "format": "status",
+            "tone": "success"
+          },
+          {
+            "key": "splitTotalAmount",
+            "label": "分账总金额(元)",
+            "value": 766651.38,
+            "format": "amount",
+            "currency": "CNY"
+          },
+          {
+            "key": "receivedTotalAmount",
+            "label": "到账总金额(元)",
+            "value": 6654.98,
+            "format": "amount",
+            "currency": "CNY"
+          },
+          {
+            "key": "splitMode",
+            "label": "分账方式",
+            "value": "自动"
+          },
+          {
+            "key": "receivedCount",
+            "label": "分账到账笔数",
+            "value": "2笔"
+          },
+          {
+            "key": "operatorName",
+            "label": "操作员名称",
+            "value": "杨小雨"
+          },
+          {
+            "key": "startedAt",
+            "label": "分账发起时间",
+            "value": "2025-05-29 18:00:02",
+            "format": "datetime"
+          },
+          {
+            "key": "batchNo",
+            "label": "分账批次号",
+            "value": "1320250529180001984748592271",
+            "span": "full"
+          }
+        ]
+      },
+      {
+        "key": "payment",
+        "title": "支付信息",
+        "fields": [
+          {
+            "key": "paymentMerchant",
+            "label": "商户简称",
+            "value": "签约名10080028707"
+          },
+          {
+            "key": "paymentStatus",
+            "label": "分账状态",
+            "value": "部分成功",
+            "format": "status",
+            "tone": "success"
+          },
+          {
+            "key": "paymentTotal",
+            "label": "分账总金额(元)",
+            "value": 766651.38,
+            "format": "amount",
+            "currency": "CNY"
+          },
+          {
+            "key": "paymentReceived",
+            "label": "到账总金额(元)",
+            "value": 6654.98,
+            "format": "amount",
+            "currency": "CNY"
+          },
+          {
+            "key": "paymentMode",
+            "label": "分账方式",
+            "value": "自动"
+          },
+          {
+            "key": "paymentReceivedCount",
+            "label": "分账到账笔数",
+            "value": "2笔"
+          },
+          {
+            "key": "paymentOperator",
+            "label": "操作员名称",
+            "value": "杨小雨"
+          },
+          {
+            "key": "paymentStartedAt",
+            "label": "分账发起时间",
+            "value": "2025-05-29 18:00:02",
+            "format": "datetime"
+          },
+          {
+            "key": "paymentBatchNo",
+            "label": "分账批次号",
+            "value": "1320250529180001984748592271",
+            "span": "full"
+          }
+        ]
+      },
+      {
+        "key": "refund",
+        "title": "退款信息",
+        "fields": [],
+        "table": {
+          "rowKey": "refundId",
+          "columns": [
+            {
+              "key": "requestAt",
+              "label": "退款请求时间"
+            },
+            {
+              "key": "refundNo",
+              "label": "退款请求号"
+            },
+            {
+              "key": "completedAt",
+              "label": "退款完成时间"
+            },
+            {
+              "key": "amount",
+              "label": "退款金额(元)",
+              "format": "amount",
+              "currency": "CNY"
+            },
+            {
+              "key": "refundReason",
+              "label": "退款说明"
+            },
+            {
+              "key": "accountRemark",
+              "label": "账备注"
+            },
+            {
+              "key": "status",
+              "label": "退款状态",
+              "format": "status",
+              "statusMap": {
+                "success": {
+                  "label": "成功",
+                  "tone": "success"
+                },
+                "failed": {
+                  "label": "失败",
+                  "tone": "error"
+                }
+              }
+            }
+          ],
+          "rows": [
+            {
+              "refundId": "RF001",
+              "requestAt": "2025-05-29 18:08:21",
+              "refundNo": "10082983398",
+              "completedAt": "2025-05-29 18:09:10",
+              "amount": 26293.99,
+              "refundReason": "-",
+              "accountRemark": "-",
+              "status": "success"
+            },
+            {
+              "refundId": "RF002",
+              "requestAt": "2025-05-29 18:10:32",
+              "refundNo": "10082983399",
+              "completedAt": "2025-05-29 18:11:03",
+              "amount": 3223.99,
+              "refundReason": "-",
+              "accountRemark": "-",
+              "status": "success"
+            },
+            {
+              "refundId": "RF003",
+              "requestAt": "2025-05-29 18:12:45",
+              "refundNo": "10082983400",
+              "completedAt": "2025-05-29 18:13:21",
+              "amount": 2332.87,
+              "refundReason": "余额不足",
+              "accountRemark": "余额不足",
+              "status": "failed"
+            }
+          ]
+        }
+      }
+    ],
+    "actions": {
+      "primary": {
+        "key": "close",
+        "label": "我知道了",
+        "danger": true
+      }
+    }
+  }
+}
+  </script>
+</section>

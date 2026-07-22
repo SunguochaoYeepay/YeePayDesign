@@ -1,0 +1,23 @@
+page:
+  name: 分账规则创建失败-错误结果
+  family: result
+  presentation: page
+  reason: 创建失败后需明确失败状态、原因说明和可恢复操作。
+ui:
+  platform: admin-pc-ant
+  runtime: vue-ant
+  rendererVersion: 2
+content:
+  capabilities: [result.basic]
+  states: [error]
+result:
+  source: 分账规则创建表单
+  status: error
+  title: 创建失败
+  description: 账户信息校验未通过，请返回修改后重新提交。
+  actions:
+    primary: { key: returnToEdit, label: 返回修改 }
+    secondary:
+      - { key: returnList, label: 返回列表 }
+rules:
+  - 错误结果必须提供返回修改或重试等恢复动作，不能只展示失败状态。

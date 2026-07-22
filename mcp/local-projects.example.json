@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "my-admin-project",
+      "label": "我的后台原型项目",
+      "root": "/absolute/path/to/my-admin-project"
+    }
+  ]
+}

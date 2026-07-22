@@ -9,6 +9,18 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 
 最重要的原则：**Shell 固定，内容区可变**。
 
+## 业务需求入口
+
+业务人员可以直接提交原始 PRD、会议纪要、自然语言描述和截图，不需要选择页面类型、模板、平台、图标或输出文件。先由 Agent 将需求转换为 Page Spec，再由同一工作流生成内容区。页面族和能力组合必须针对本次需求重新推导，不能复用上一个场景的结论。
+
+- 查询、筛选、结果列、分页等证据优先归入 `list`；新增、编辑、配置、录入等证据优先归入 `form`；记录查看归入 `detail`；提交完成或异常归入 `result`。页面族由证据组合决定，不做关键词机械匹配。
+- “第 N 步 / 下一步 / 完成后”是评估 `form.steps` 的证据，不是强制条件。只有明确的流程依赖才使用步骤条。
+- 少量独立字段或当前步骤字段较少，且右侧说明或产品服务资产确实帮助理解、核对时，可选择 `form.sideIllustration`：左侧单列字段、右侧插图说明；仅在存在明确阶段依赖时才额外显示顶部 Steps，不能与分组表单组合。
+- 业务规则、数据源、接口或资金安全约束进入 Page Spec 的 `validation`、`rules`、`assumptions`，不直接铺进字段区域。
+- 只有菜单路径、目标用户、关键字段或成功去向缺失且会改变页面结构时，才能提一个澄清问题；其余采用合理默认值，并记录假设。
+- 截图用于还原内容区布局和视觉意图；固定 Shell 仍由框架提供，不能从截图重画。
+- Page Spec 需写明页面族与能力组合的选择理由，以及不采用其他候选能力的原因，供产品、UI、前端审核。
+
 默认只生成 `#page-content` 内容区；只有用户明确要求“输出完整 HTML”时，才把内容区注入 `shell/app-shell.html`，并且不得改动 Shell 结构。
 
 ## 必须读取
@@ -20,6 +32,8 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 - `design-system/components.css`
 - `design-system/ANT-PC-COMPONENT-CONTRACT.md`
 - `design-system/ANT-PC-ICON-REGISTRY.md`
+- `design-system/icon-runtime.js`
+- `design-system/icons/ant/sprite.svg`
 - `shell/app-shell.html`
 - `shell/menu.config.yaml`
 - `templates/page-content.template.html`
@@ -35,6 +49,8 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 - `specs/result-pattern-rules.md`
 - `templates/partials/`
 - `templates/primitives/admin-pc-ant/`
+- `templates/primitives/admin-pc-ant/form-layout.template.html`
+- `templates/partials/form/side-illustration.template.html`
 
 ## 工作流程
 
@@ -50,6 +66,15 @@ description: 基于老板管账后台视觉规范和可组合内容模式，生�
 10. 默认输出 `page-content.html` 片段。
 11. 同时输出 `preview.html`，但 `preview.html` 只能通过固定 Shell 注入生成，不能手工重画 Shell。
 12. 最后给出简短自检结果。
+
+PC 页面生成后必须执行 `node tools/check-pc-ant-icons.mjs <page-content.html>`。检查失败时，禁止宣称图标契约通过。
+
+## 执行上限
+
+- 先读取核心上下文和 `content-pattern-catalog.md`，再只读取当前 Page Spec 所属页面族的规则与局部模板；不得为单页面任务全量加载列表、表单、详情、结果全部分支。
+- 自动验证仅限图标静态校验和 `build-preview.mjs` 构建。静态校验失败最多修正一次。
+- 除非用户明确要求，禁止自动浏览器目视检查、截图对比、设计互评、审美评分或连续自主修订；生成后由用户验收 `preview.html`。
+- 不得将提交成功、失败、加载状态作为首屏常驻内容；仅保留隐藏结构或写入 Page Spec 的交互转场。
 
 ## 生成边界
 
@@ -124,7 +149,9 @@ Shell 可调整项只来自 `shell/menu.config.yaml`：
 
 ## 弹窗表单规则
 
-表单遵循 `form-pattern-rules.md`。字段使用统一 `.field` 结构；必须处理必填、条件显隐、首个错误定位与提交结果。弹窗仅适用于不复杂的局部操作。
+表单遵循 `form-pattern-rules.md`。PC 页面级字段使用 `form-layout.template.html` 的 `.ui-form-field` 结构；`form.sideIllustration` 使用左侧单列字段和右侧插图，不能套用双字段列；只有分阶段表单才显示顶部 Steps。必须处理必填、条件显隐、首个错误定位与提交结果。弹窗仅适用于不复杂的局部操作。
+
+在生成表单前，必须从本次需求重新确定菜单路径、页面骨架和排除项。复杂业务规则先进入 Page Spec 的 `validation`、`rules`、`assumptions`；页面只保留短 label、placeholder、helperText 和错误文本。PC 页面级表单按字段布局选择单列或多列：单列字段的操作与输入控件左边对齐；多列/多分组长表单使用底部悬停操作栏，不能将长规则压缩为竖排文字。
 
 ## 详情页规则
 

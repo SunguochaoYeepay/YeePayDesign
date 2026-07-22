@@ -1,0 +1,65 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账复核完成-摘要结果",
+    "family": "result",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "result.basic",
+      "result.summary"
+    ],
+    "states": [
+      "success"
+    ]
+  },
+  "result": {
+    "source": "分账批量复核流程",
+    "status": "success",
+    "title": "复核成功",
+    "description": "稍后即可在转账记录中查看资金到账情况。",
+    "actions": {
+      "primary": {
+        "key": "continueReview",
+        "label": "继续复核"
+      },
+      "secondary": [
+        {
+          "key": "viewTransferRecords",
+          "label": "查看转账记录"
+        }
+      ]
+    },
+    "summary": {
+      "items": [
+        {
+          "key": "reviewedCount",
+          "label": "复核通过",
+          "value": "共1笔"
+        },
+        {
+          "key": "reviewedAmount",
+          "label": "复核通过金额",
+          "value": "共10.00元"
+        },
+        {
+          "key": "transferredCount",
+          "label": "转账受理成功",
+          "value": "共1笔"
+        },
+        {
+          "key": "transferredAmount",
+          "label": "转账受理成功金额",
+          "value": "共10.00元"
+        }
+      ]
+    }
+  }
+}
+  </script>
+</section>

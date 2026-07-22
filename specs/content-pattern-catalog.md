@@ -78,30 +78,44 @@
 
 适用：新增、编辑、配置、开户、导入、审核提交。
 
+### 模板注册表
+
+| `template.id` | 模板名称 | 业务判断 | 默认能力 |
+| --- | --- | --- | --- |
+| `form.single-stage` | 单阶段信息收集表单 | 少量独立字段，一次收集并提交。 | `form.simple`。 |
+| `form.grouped-configuration` | 分组配置表单 | 字段较多或至少两个信息组，但无明确阶段依赖。 | `form.groups + form.stickyActions`。 |
+| `form.staged-configuration` | 分阶段配置表单 | 前一阶段完成后，才能填写、确认或进入下一阶段。 | `form.steps`；当前阶段可按需要叠加信息组。 |
+| `form.import-review-flow` | 导入复核流程表单 | 上传、校验、复核、确认和结果组成闭环。 | `form.steps + form.upload + form.reviewTable + form.uploadFlow + form.stickyActions`。 |
+
+选择优先级固定为：导入复核闭环 -> 明确阶段依赖 -> 信息分组 -> 单阶段收集。`form.steps`、
+`form.groups` 等仍是可组合的实现能力，不能将业务示例名称直接当作模板名称。
+
 ### 能力模块
 
 | 能力 | `capability` | 说明 |
 | --- | --- | --- |
-| 简单表单 | `form.simple` | 少量字段，左侧标签、纵向表单。 |
-| 表单说明图 | `form.illustration` | 可选的右侧说明/插图；窄屏隐藏。未生成时使用统一占位，后续由 OpenDesign 替换真实资产。 |
+| 简单表单 | `form.simple` | 少量字段，标签右对齐、纵向单列、字段内操作。 |
 | 分步表单 | `form.steps` | 有明确先后依赖的流程。 |
-| 分组表单 | `form.groups` | 复杂且并列的信息组，顶部标签，多列布局。 |
-| 粘性操作栏 | `form.stickyActions` | 多步骤、长表单、批量处理时使用。 |
-| 草稿 | `form.draft` | 支持暂存、恢复、离开确认。 |
-| 文件上传 | `form.upload` | 上传、解析/校验、错误行提示、确认提交。 |
-| 审核确认 | `form.confirm` | 提交前只读复核或二次确认。 |
-| 提交结果 | `form.resultTransition` | 提交后进入结果状态或返回来源列表。 |
+| 简单/步骤表单配图布局 | `form.sideIllustration` | 单阶段或当前步骤字段较少时，左侧为单列字段和操作，右侧为产品服务配图与简短说明。 |
+| 分组表单 | `form.groups` | 两个或更多信息组，Card 分隔，标签在上、多列网格。 |
+| 粘性操作栏 | `form.stickyActions` | 多列/多分组、上传复核等页面级任务的底部操作。 |
+| 录入方式切换 | `form.modeTabs` | 单条/批量、手工/文件等互斥填写方式。 |
+| 文件上传 | `form.upload` | 受限格式文件上传与文件列表。 |
+| 上传复核表 | `form.reviewTable` | 上传校验通过后的只读结构化记录。 |
+| 上传流程 | `form.uploadFlow` | 上传、校验、确认、结果的同一流程状态。 |
 
 ### 组合规则
 
-- `form.simple` 与 `form.groups` 二选一；字段很少但需说明时可加 `form.illustration`。
+- `form.simple` 与 `form.groups` 二选一；`form.groups` 必须声明多列布局与粘性操作栏。
 - 字段多不自动等于 `form.steps`。只有业务存在明确顺序、前一步决定后一步时，才能使用步骤条。
 - `form.steps` 可与 `form.groups` 结合：每一步内部可含一个或多个信息组。
-- `form.upload` 默认组合为 `上传 -> 校验 -> 确认 -> 结果`，不能跳过校验结果。
-- `form.stickyActions` 用于长页面、多步骤或批量提交；简短弹窗表单禁止使用。
+- `form.uploadFlow` 固定组合为 `上传 -> 校验 -> 确认 -> 结果`，不能跳过校验结果；它需要
+  `form.steps`、`form.upload`、`form.reviewTable` 与 `form.stickyActions`。
+- `form.stickyActions` 用于多列/多分组的长页面或批量提交；分步表单若当前步骤为单列字段，则使用字段内操作。简短弹窗表单禁止使用。
 - 必填校验失败后，聚焦并滚动到第一个错误字段；不能只在页面底部展示模糊错误。
 - 编辑既有数据时，需在 Page Spec 声明初始值来源、是否可修改和未保存离开提醒。
-- `form.illustration` 必须声明 `assetKey`、用途、画面主题和资产状态；初期使用 `placeholder`，不能以无关图片凑位。
+- `form.modeTabs` 仅用于互斥录入方式，切换后清空方式字段与校验，公共字段保留。
+- `form.sideIllustration` 可与 `form.single-stage` 或字段较少的 `form.staged-configuration` 组合；字段区使用单列纵向堆叠，不能套用 `form.groups` 的多字段列网格。
 
 ### 展示形式判断
 
@@ -119,17 +133,17 @@
 
 | 能力 | `capability` | 说明 |
 | --- | --- | --- |
-| 快速查看 | `detail.quickView` | 少量字段，无横向滚动。 |
+| 快速查看 | `detail.quickView` | 少量字段、无关联表的 Modal 或 Drawer 核对。 |
 | 分组字段 | `detail.groups` | 默认三列，长值可跨两列或整行。 |
-| 锚点导航 | `detail.anchors` | 信息组紧密相关、页面较长时使用。 |
-| 区段标签 | `detail.sectionTabs` | 信息组相对独立，或各组具备独立操作时使用。 |
+| 锚点导航 | `detail.anchors` | 信息组紧密相关、独立页较长时使用。 |
+| 区段标签 | `detail.sectionTabs` | 信息组相对独立，独立页内按 Tabs 切换。 |
 | 关键摘要 | `detail.metrics` | 关键状态、金额、数量等摘要信息。 |
 | 内嵌表格 | `detail.embeddedTable` | 关联记录、明细、操作日志。 |
 | 页面操作 | `detail.actions` | 编辑、下载、撤销、返回等。 |
 
 ### 组合规则
 
-- `detail.quickView` 默认用于 `modal` 或 `drawer`，字段过多时改为独立页面。
+- `detail.quickView` 用于 `modal` 或 `drawer`；Modal 只承载少量字段，关联表或多组内容改为 Drawer 或独立页面。
 - `detail.anchors` 与 `detail.sectionTabs` 二选一：紧密连续的信息组用锚点；相对独立且可分别操作的信息组用区段标签。
 - `detail.metrics` 只展示业务关键摘要，不超过 5 个。
 - `detail.embeddedTable` 属于详情的一部分；需要复杂筛选、批量动作或单独路由时应拆为列表页面。
@@ -162,7 +176,7 @@
 - 所有结果必须有 `status`：`success`、`error`、`warning` 或 `processing`。
 - `result.summary` 用于批量处理或需要解释结果的业务，简单成功无需堆叠摘要卡。
 - `error` 必须提供可行动作：返回修改、重试、下载错误明细或联系支持。
-- 结果通常是当前流程状态，默认 `inline-state` 或 `modal`，不创建菜单和 Shell 标签。
+- 结果通常是当前流程状态，默认 `inline-state` 或 `page`，不创建菜单和 Shell 标签。
 - 必须从 `form`、`list` 操作或异步任务入口关联到结果，不允许孤立设计结果页。
 
 ## 7. 首页骨架 `home`
@@ -176,8 +190,11 @@
 | 列表 + 高级筛选 + 批量选择 + 行操作 | 允许 | 常见管理场景，状态需完整。 |
 | 列表 + 可展开子表 + 独立详情 | 允许 | 子表负责从属记录，详情负责完整信息。 |
 | 列表 + 指标摘要 | 允许 | 指标只表达当前列表的核心概览。 |
-| 简单表单 + 右侧说明图 | 允许 | 仅在说明对填写有帮助时使用。 |
+| 分步表单 + 右侧说明图 | 允许 | 仅在说明对当前填写有帮助时使用。 |
 | 分步表单 + 分组表单 + 粘性操作栏 | 允许 | 适用于复杂流程。 |
+| 上传 + 校验复核表 + 结果状态 | 允许 | 同一流程中完成导入与确认。 |
+| 分组表单 + 右侧说明图 | 禁止 | 两种布局对字段宽度和信息密度的要求冲突。 |
+| 分组表单 + 方式 Tabs | 禁止 | 当前运行器不混合两种字段来源和布局。 |
 | 详情 + 锚点导航 + 区段标签 | 禁止 | 两种页面内导航会造成层级混乱。 |
 | 列表 + 页面级复杂表单作为同一骨架 | 禁止 | 应通过 `modal`、`drawer` 或独立路由连接。 |
 | 详情内嵌可筛选、可批量操作的大表 | 禁止 | 应拆分为独立列表。 |

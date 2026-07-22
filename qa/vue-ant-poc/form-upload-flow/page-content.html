@@ -1,0 +1,206 @@
+<section id="page-content" class="page" data-runtime="vue-ant">
+  <div data-admin-pc-vue-root></div>
+  <script type="application/json" data-admin-pc-vue-page>
+{
+  "schemaVersion": 2,
+  "runtime": "vue-ant",
+  "page": {
+    "name": "分账规则批量导入",
+    "family": "form",
+    "presentation": "page"
+  },
+  "content": {
+    "capabilities": [
+      "form.steps",
+      "form.modeTabs",
+      "form.upload",
+      "form.reviewTable",
+      "form.uploadFlow",
+      "form.stickyActions"
+    ],
+    "states": [
+      "loading",
+      "error"
+    ]
+  },
+  "template": {
+    "id": "form.import-review-flow"
+  },
+  "form": {
+    "fieldLayout": "single-column",
+    "sectionTitle": "导入规则信息",
+    "actions": {
+      "placement": "sticky-end",
+      "primaryLabel": "下一步"
+    },
+    "steps": [
+      {
+        "key": "upload",
+        "title": "上传文件",
+        "description": "上传并校验导入文件",
+        "status": "process"
+      },
+      {
+        "key": "review",
+        "title": "确认信息",
+        "description": "核对解析后的规则数据",
+        "status": "wait"
+      },
+      {
+        "key": "result",
+        "title": "完成",
+        "description": "导入结果确认",
+        "status": "wait"
+      }
+    ],
+    "modeTabs": {
+      "defaultKey": "batch",
+      "items": [
+        {
+          "key": "single",
+          "label": "单条上传",
+          "disabledUntil": [
+            "singleUpload"
+          ],
+          "fields": [
+            {
+              "key": "singleUpload",
+              "label": "上传文件",
+              "control": "upload",
+              "required": true,
+              "accept": [
+                ".xlsx"
+              ],
+              "maxCount": 1,
+              "buttonLabel": "上传规则文件"
+            }
+          ]
+        },
+        {
+          "key": "batch",
+          "label": "批量上传",
+          "disabledUntil": [
+            "importName",
+            "batchUpload"
+          ],
+          "fields": [
+            {
+              "key": "importName",
+              "label": "导入任务名称",
+              "control": "input",
+              "required": true,
+              "placeholder": "请输入本次导入任务名称"
+            },
+            {
+              "key": "batchUpload",
+              "label": "上传文件",
+              "control": "upload",
+              "required": true,
+              "accept": [
+                ".xlsx"
+              ],
+              "maxCount": 1,
+              "buttonLabel": "上传 Excel 文件",
+              "templateAction": {
+                "key": "downloadTemplate",
+                "label": "下载 Excel 模板"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "submit": {
+      "validationMode": "form-rules",
+      "successTarget": "导入复核页"
+    },
+    "uploadFlow": {
+      "review": {
+        "validationMessage": "文件校验通过，共识别 3 条分账规则。",
+        "rowKey": "ruleId",
+        "columns": [
+          {
+            "key": "ruleName",
+            "label": "规则名称"
+          },
+          {
+            "key": "merchantCode",
+            "label": "商户编号"
+          },
+          {
+            "key": "settlementCycle",
+            "label": "执行分账时间"
+          },
+          {
+            "key": "splitMode",
+            "label": "分账模式"
+          }
+        ],
+        "rows": [
+          {
+            "ruleId": "R001",
+            "ruleName": "连锁门店分润",
+            "merchantCode": "10080048989",
+            "settlementCycle": "每日00:00分账",
+            "splitMode": "资金分账-多渠道资金"
+          },
+          {
+            "ruleId": "R002",
+            "ruleName": "联合运营",
+            "merchantCode": "10080048989",
+            "settlementCycle": "每月1日00:00分账",
+            "splitMode": "收单分账"
+          },
+          {
+            "ruleId": "R003",
+            "ruleName": "实时交易",
+            "merchantCode": "10080048989",
+            "settlementCycle": "每日00:00分账",
+            "splitMode": "资金分账-多渠道资金"
+          }
+        ],
+        "summary": {
+          "items": [
+            {
+              "label": "已识别规则",
+              "value": "3条"
+            },
+            {
+              "label": "涉及商户",
+              "value": "1个"
+            }
+          ]
+        },
+        "previousLabel": "上一步",
+        "confirmLabel": "确认导入"
+      },
+      "result": {
+        "title": "提交成功",
+        "subtitle": "已成功导入分账规则，可在规则管理中查看处理状态。",
+        "summaryItems": [
+          {
+            "label": "导入规则数",
+            "value": "3条"
+          },
+          {
+            "label": "校验通过数",
+            "value": "3条"
+          }
+        ],
+        "actions": {
+          "primary": {
+            "key": "continueImport",
+            "label": "继续导入"
+          },
+          "secondary": {
+            "key": "viewRules",
+            "label": "查看规则管理"
+          }
+        }
+      }
+    }
+  },
+  "illustration": {}
+}
+  </script>
+</section>
